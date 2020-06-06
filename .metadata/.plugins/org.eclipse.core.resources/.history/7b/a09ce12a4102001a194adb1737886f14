@@ -1,0 +1,112 @@
+package controller;
+
+import java.util.Map;
+
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+import model.dao.AliquotaIvaService;
+import model.session.AliquotaIva;
+
+public class GestioneAliquotaIva extends ActionSupport implements SessionAware {
+
+	// Attributi
+	public static final String KEY_LIST = "lista";
+	public static final String KEY_OBJ = "oggetto";
+	private SessionMap<String, Object> sessionMap;
+	private String chiave;
+	private AliquotaIva oaliquotaiva;
+	private String descrizioneAli;
+	private int aliquotaAli;
+
+	AliquotaIvaService oAli = new AliquotaIvaService();
+
+	// Get e set
+
+	public String getChiave() {
+		return chiave;
+	}
+
+	public AliquotaIva getOaliquotaiva() {
+		return oaliquotaiva;
+	}
+
+	public void setOaliquotaiva(AliquotaIva oaliquotaiva) {
+		this.oaliquotaiva = oaliquotaiva;
+	}
+
+	public String getDescrizioneAli() {
+		return descrizioneAli;
+	}
+
+	public void setDescrizioneAli(String descrizioneAli) {
+		this.descrizioneAli = descrizioneAli;
+	}
+
+	public int getAliquotaAli() {
+		return aliquotaAli;
+	}
+
+	public void setAliquotaAli(int aliquotaAli) {
+		this.aliquotaAli = aliquotaAli;
+	}
+
+	public void setChiave(String chiave) {
+		this.chiave = chiave;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		this.sessionMap = (SessionMap<String, Object>) arg0;
+	}
+
+	public String execute() {
+		sessionMap.put(KEY_LIST, oAli.findAll());
+		return "search";
+	}
+
+	public String modificaAliquota() {
+		if (this.chiave != null) {
+			sessionMap.put(KEY_OBJ, oAli.findById(Integer.parseInt(this.chiave.replace("\'", ""))));	
+		} else 
+			addActionError("Valorizzare il pulsante per effettuare modifiche");
+		return "nuovomodifica";
+	}
+
+	public String nuovaAliquota() {
+		sessionMap.put(KEY_OBJ, new AliquotaIva());
+		return "nuovomodifica";
+	}
+
+	public String eliminaAliquota() {
+		if (this.chiave != null)
+			oAli.deleteOj(oAli.findById(Integer.parseInt(this.chiave.replace("\'", ""))));
+		else
+			addActionError("Valorizzare il pulsante per eliminare");
+		return execute();
+	}
+
+	public String annulla() {
+		return execute();
+	}
+
+	public String registra() {
+		AliquotaIva oAliquotaIva = (AliquotaIva) sessionMap.get(KEY_OBJ);
+		if (aliquotaAli != 0)
+			oAliquotaIva.setAliquota(aliquotaAli);
+		else
+			addActionError("Aliquota Iva non inserita");
+		if (descrizioneAli != null)
+			oAliquotaIva.setDescrizione(descrizioneAli);
+		else
+			addActionError("Descrizione non inserita");
+		if(getActionErrors() == null) {
+		oAli.persistOrUpdate(oAliquotaIva);
+		return execute(); }
+		else 
+			return "nuovomodifica";
+	}
+
+}

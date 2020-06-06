@@ -1,0 +1,19 @@
+1570439118188	Rename resource 'PgsGestioneAreaNuovoModifica,jsp.jsp'
+1570439743668	Rename resource 'GestioneFornitore.jsp'
+1570440636778	Rename resource 'PgsGestioneFornitoreNuovoModifica,jsp.jsp'
+1570440644523	Rename resource 'PgsGestioneOrdineAcquistoNuovoModifica,jsp.jsp'
+1570440650188	Rename resource 'PgsGestionePreventivoNuovoModifica,jsp.jsp'
+1570440658313	Rename resource 'PgsGestioneProgettoNuovoModifica,jsp.jsp'
+1570440664761	Rename resource 'PgsGestioneSottoCategoriaNuovoModifica,jsp.jsp'
+1570440669548	Rename resource 'PgsGestioneSpesaInvestimentoNuovoModifica,jsp.jsp'
+1570521963511	Delete element
+1570543448308	Delete elements
+1570543792847	Delete element
+1570544801646	Move 'PgsGestioneOrdineAcquisto.jsp' to 'GestioneFatturaPassiva'
+1570544821681	Rename resource 'PgsGestioneOrdineAcquisto.jsp'
+1570545104137	Copy file
+1570545131812	Rename resource 'PgsGestioneFatturaPassiva.jsp'
+1570546564421	Rename resource 'PgsElencoFatturaPassivaPerFornitore.jsp'
+1570548072052	Rename field 'elencoFornitori'
+1570548899792	Rename field 'elencoFornitori'
+1570712141223	Rename resource 'PgsGestioneFatturaNuovo.jsp'

@@ -1,0 +1,9 @@
+1571650337073	Rename local variable 'listaperazienda'
+1571907242194	Rename resource 'PgsGestioneArea.jsp'
+1571907248340	Rename resource 'PgsGestioneAreaNuovoModifica.jsp'
+1571912248502	Delete element
+1571913172220	Rename resource 'PgeGestionePagamentoMain.jsp'
+1571922307884	Copy compilation unit
+1571922316422	Delete element
+1571925366455	Delete element
+1571991918036	Move 'struts.xml' to 'WEB-INF'

@@ -1,0 +1,8 @@
+1575277956625	Encapsulate field 'sessionMap'
+1575364615162	Rename resource 'PgsDefinizione.jsp'
+1575370255306	Rename resource 'DefinizioneSpesaInvestimento.jsp'
+1575370263629	Rename resource 'DefinizioneSottoCategoria.jsp'
+1575455317571	Rename field 'chiaveAree'
+1575455327409	Rename field 'chiaveSottoCategorie'
+1575455335471	Rename field 'chiaveSpeseInvestimento'
+1575562153249	Rename local variable 'chiaviAreeCheck2'

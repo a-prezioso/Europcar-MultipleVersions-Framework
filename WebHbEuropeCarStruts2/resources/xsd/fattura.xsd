@@ -1,0 +1,206 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="FatturaElettronicaHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DatiTrasmissione">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IdTrasmittente">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="IdPaese"/>
+                    <xs:element type="xs:int" name="IdCodice"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="ProgressivoInvio"/>
+              <xs:element type="xs:string" name="FormatoTrasmissione"/>
+              <xs:element type="xs:string" name="CodiceDestinatario"/>
+              <xs:element name="ContattiTrasmittente">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="Telefono"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CedentePrestatore">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DatiAnagrafici">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="IdFiscaleIVA">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="IdPaese"/>
+                          <xs:element type="xs:long" name="IdCodice"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:long" name="CodiceFiscale"/>
+                    <xs:element name="Anagrafica">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="Denominazione"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="RegimeFiscale"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Sede">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="Indirizzo"/>
+                    <xs:element type="xs:short" name="CAP"/>
+                    <xs:element type="xs:string" name="Comune"/>
+                    <xs:element type="xs:string" name="Provincia"/>
+                    <xs:element type="xs:string" name="Nazione"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CessionarioCommittente">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DatiAnagrafici">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="IdFiscaleIVA">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="IdPaese"/>
+                          <xs:element type="xs:int" name="IdCodice"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:int" name="CodiceFiscale"/>
+                    <xs:element name="Anagrafica">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="Denominazione"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Sede">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="Indirizzo"/>
+                    <xs:element type="xs:int" name="CAP"/>
+                    <xs:element type="xs:string" name="Comune"/>
+                    <xs:element type="xs:string" name="Provincia"/>
+                    <xs:element type="xs:string" name="Nazione"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TerzoIntermediarioOSoggettoEmittente">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DatiAnagrafici">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="IdFiscaleIVA">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="IdPaese"/>
+                          <xs:element type="xs:int" name="IdCodice"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:int" name="CodiceFiscale"/>
+                    <xs:element name="Anagrafica">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="Denominazione"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="SoggettoEmittente"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FatturaElettronicaBody">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DatiGenerali">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DatiGeneraliDocumento">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="TipoDocumento"/>
+                    <xs:element type="xs:string" name="Divisa"/>
+                    <xs:element type="xs:date" name="Data"/>
+                    <xs:element type="xs:byte" name="Numero"/>
+                    <xs:element type="xs:float" name="ImportoTotaleDocumento"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DatiBeniServizi">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DettaglioLinee">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="NumeroLinea"/>
+                    <xs:element type="xs:string" name="Descrizione"/>
+                    <xs:element type="xs:float" name="Quantita"/>
+                    <xs:element type="xs:float" name="PrezzoUnitario"/>
+                    <xs:element type="xs:float" name="PrezzoTotale"/>
+                    <xs:element type="xs:float" name="AliquotaIVA"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="DatiRiepilogo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:float" name="AliquotaIVA"/>
+                    <xs:element type="xs:float" name="ImponibileImporto"/>
+                    <xs:element type="xs:float" name="Imposta"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DatiPagamento">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="CondizioniPagamento"/>
+              <xs:element name="DettaglioPagamento">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="ModalitaPagamento"/>
+                    <xs:element type="xs:date" name="DataScadenzaPagamento"/>
+                    <xs:element type="xs:float" name="ImportoPagamento"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

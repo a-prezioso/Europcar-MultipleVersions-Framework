@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<package name="default" extends="struts-default">
+
+		
+		<action name="Login" class="controller.GestioneLogin">
+			<result name="input">Applicazione/PgsLogin.jsp</result>
+			<result type="redirectAction" name="selectAnno">selectAnno</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+		<action name="selectAnno"
+			class="controller.GestioneSelezioneAnno">
+			<result name="input">Applicazione/PgsAnnoMain.jsp</result>
+			<result type="redirectAction" name="Main">Main</result>
+			<result type="redirectAction" name="AreaInvestimentoAct">AreaInvestimentoAct
+			</result>
+			<result type="redirectAction" name="DefinizioneAction">DefinizioneAction</result>
+			<result type="redirectAction" name="RiconciliazioneAction">RiconciliazioneAction
+			</result>
+			<result type="redirectAction" name="AvanzamentoAction">AvanzamentoAction</result>
+			<result type="redirectAction" name="PrevisionaleAction">PrevisionaleAction</result>
+			<result type="redirectAction" name="GestioneFatAct">GestioneFatAct</result>
+			<result type="redirectAction" name="GestioneOrdAct">GestioneOrdAct</result>
+
+		</action>
+		<action name="Main" class="controller.MainAction">
+			<result name="input">Applicazione/PgsMain.jsp</result>
+			<result type="redirectAction" name="ArchivioRedirect">ArchivioAct</result>
+			<result type="redirectAction" name="BudgetRedirect">BudgetAct</result>
+			<result type="redirectAction" name="PreventivoRedirect">PreventivoAct</result>
+			<result type="redirectAction" name="OrdineAcquistoRedirect">OrdineAcquistoAct</result>
+			<result type="redirectAction" name="FatturaPassivaRedirect">FatturaPassivaAct</result>
+			<result type="redirectAction" name="AreaRedirect">AreaAction</result>
+			<result type="redirectAction" name="AziendaRedirect">AziendaAction</result>
+			<result type="redirectAction" name="GruppoRedirect">GruppoAction</result>
+			<result type="redirectAction" name="PrevisioneRedirect">PrevisionaleAction</result>
+			<result type="redirectAction" name="VenditoreRedirect">VenditoreAction</result>
+			<result type="redirectAction" name="UtenteRedirect">UtenteAction</result>
+			<result type="redirectAction" name="ImportoRedirect">ImportaFattureAction
+			</result>
+			<result type="redirectAction" name="PagamentoRedirect">MessaInPagamentoAction
+			</result>
+			<result type="redirectAction" name="ImpostazioniRedirect">ImpostazioniAction</result>
+			<result type="redirectAction" name="PianoInvestimentoRedirect">PianoInvestimentoAction
+			</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+			<result type="redirectAction" name="DefinizionePianoRedirect">DefinizionePianoAction
+			</result>
+		</action>
+		
+		<action name="DefinizionePianoAction"
+			class="controller.DefinizionePiano">
+			<result name="search">DefinizionePiano/PgsDefinizionePianoInvestimento.jsp</result>
+			<result name="definizione">DefinizionePiano/PgsDefinizioneArea.jsp</result>
+			<result name="definizioneSottoCategoria">DefinizionePiano/PgsDefinizioneSottoCategoria.jsp</result>
+			<result name="definizioneSpesaInvestimento">DefinizionePiano/PgsDefinizioneSpesaInvestimento.jsp</result>
+			
+		</action>
+		
+		<action name="PianoInvestimentoAction"
+			class="controller.PianoInvestimentoAction">
+			<result name="input">Applicazione/PgsPianoInvestimentoMain.jsp
+			</result>
+			<result type="redirectAction" name="ListaPianiRedirect">ListaPianiAction</result>
+			<result type="redirectAction" name="GeneraPianoRedirect">GeneraPianoAction</result>
+		</action>
+
+		<action name="ListaPianiAction"
+			class="controller.RicercaPianoInvestimento">
+			<result name="search">GestionePianoInvestimento/PgsPianoInvestimentoRicerca.jsp
+			</result>
+		</action>
+
+		<action name="GeneraPianoAction"
+			class="controller.GestionePianoInvestimento">
+			<result name="search">GestionePianoInvestimento/PgsPianoInvestimentoGenera.jsp
+			</result>
+		</action>
+
+
+		<action name="ImpostazioniAction"
+			class="controller.ImpostazioniAction">
+			<result name="input">Applicazione/PgsImpostazioniMain.jsp</result>
+			<result type="redirectAction"
+				name="ImpostazioniUtenteRedirect">ImpostazioniUtenteAction</result>
+			<result type="redirectAction" name="AnnoContabileRedirect">AnnoContabileAction
+			</result>
+		</action>
+
+		<action name="ImpostazioniUtenteAction"
+			class="controller.GestioneImpostazioni">
+			<result name="search">GestioneImpostazioni/PgsGestioneImpostazioni.jsp
+			</result>
+			<result name="nuovomodifica">GestioneImpostazioni/PgsGestioneImpostazioniNuovoModifica.jsp
+			</result>
+			<result name="modificapw">GestioneImpostazioni/PgsGestioneImpostazioniPassword.jsp
+			</result>
+		</action>
+
+		<action name="AnnoContabileAction"
+			class="controller.GestioneAnnoContabile">
+			<result name="search">GestioneAnnoContabile/PgsGestioneAnnoContabile.jsp
+			</result>
+			<result name="nuovo">GestioneAnnoContabile/PgsGestioneAnnoContabileNuovo.jsp
+			</result>
+		</action>
+
+		<action name="MessaInPagamentoAction"
+			class="controller.PagamentoAction">
+			<result name="input">Applicazione/PgsPagamentoMain.jsp</result>
+			<result type="redirectAction" name="GestioneRedirect">GestioneAction</result>
+			<result type="redirectAction" name="GenerazioneRedirect">GenerazioneAction</result>
+		</action>
+
+		<action name="GestioneAction"
+			class="controller.GestionePagamentoAction">
+			<result name="input">Applicazione/PgsGestionePagamentoMain.jsp
+			</result>
+			<result type="redirectAction" name="PagamentoRedirect">PagamentoAction</result>
+			<result type="redirectAction" name="RicercaRedirect">RicercaAction</result>
+		</action>
+
+		<action name="PagamentoAction"
+			class="controller.GestionePagamentoFatture">
+			<result name="search">GestionePagamento/PgsGestionePagamentoRicerca.jsp
+			</result>
+			<result name="pagamento">GestionePagamento/PgsGestionePagamento.jsp
+			</result>
+			<result type="redirectAction" name="chiudi">GestioneAction</result>
+		</action>
+
+		<action name="RicercaAction" class="controller.RicercaDistinte">
+			<result name="search">GestionePagamento/PgsRicercaDistinte.jsp</result>
+			<result name="cerca">GestionePagamento/PgsRicercaDistinteCerca.jsp
+			</result>
+		</action>
+
+		<action name="GenerazioneAction"
+			class="controller.GestioneGenerazione">
+			<result name="search">GestionePagamento/PgsGestioneGenerazione.jsp
+			</result>
+			<result type="redirectAction" name="chiudi">MessaInPagamentoAction
+			</result>
+		</action>
+
+		<action name="ImportaFattureAction"
+			class="controller.GestioneImportaFatture">
+			<result name="search">GestioneImportaFatture/PgsGestioneImportaFatture.jsp
+			</result>
+		</action>
+
+		<action name="GruppoAction" class="controller.GestioneGruppo">
+			<result name="search">GestioneGruppo/PgsGestioneGruppo.jsp</result>
+			<result name="nuovomodifica">GestioneGruppo/PgsGestioneGruppoNuovoModifica.jsp
+			</result>
+		</action>
+		<action name="AziendaAction" class="controller.GestioneAzienda">
+			<result name="search">GestioneAzienda/PgsGestioneAzienda.jsp</result>
+			<result name="nuovomodifica">GestioneAzienda/PgsGestioneAziendaNuovoModifica.jsp
+			</result>
+		</action>
+
+		<action name="VenditoreAction"
+			class="controller.GestioneVenditore">
+			<result name="search">GestioneVenditore/PgsGestioneVenditore.jsp
+			</result>
+			<result name="nuovomodifica">GestioneVenditore/PgsGestioneVenditoreNuovoModifica.jsp
+			</result>
+			<result name="nuovomodificatipo">GestioneVenditore/PgsGestioneTipoVenditoreNuovoModifica.jsp
+			</result>
+			<result name="ricercapervenditore">GestioneVenditore/PgsGestioneVenditoreRicerca.jsp
+			</result>
+			<result name="nuovomodificaprevisione">GestioneVenditore/PgsGestioneVenditorePrevisionaleNuovoModifica.jsp
+			</result>
+		</action>
+		<action name="UtenteAction" class="controller.GestioneUtente">
+			<result name="search">GestioneUtente/PgsGestioneUtente.jsp</result>
+			<result name="nuovomodifica">GestioneUtente/PgsGestioneUtenteNuovoModifica.jsp
+			</result>
+			
+		</action>
+
+		<action name="PrevisionaleAction"
+			class="controller.GestionePrevisionale">
+			<result name="search">GestionePrevisionale/PgsGestionePrevisionaleRicerca.jsp
+			</result>
+			<result name="cerca">GestionePrevisionale/PgsGestionePrevisionale.jsp
+			</result>
+			<result name="nuovomodifica">GestionePrevisionale/PgsGestionePrevisionaleNuovoModifica.jsp
+			</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+		<action name="ArchivioAct" class="controller.ArchivioAction">
+			<result name="input">Applicazione/PgsMainArchivio.jsp</result>
+			<result type="redirectAction" name="AliquotaIvaRedirect">AliquotaIvaAct</result>
+			<result type="redirectAction" name="AreaRedirect">AreaAct</result>
+			<result type="redirectAction" name="FornitoreRedirect">FornitoreAct</result>
+			<result type="redirectAction" name="ProgettoRedirect">ProgettoAct</result>
+			<result type="redirectAction" name="SottoCategoriaRedirect">SottoCategoriaAct</result>
+			<result type="redirectAction" name="AreaInvestimentoRedirect">AreaInvestimentoAct
+			</result>
+			<result type="redirectAction" name="AziendaRedirect">AziendaAction</result>
+			<result type="redirectAction" name="GruppoRedirect">GruppoAction</result>
+		</action>
+		<action name="AreaInvestimentoAct"
+			class="controller.GestioneAreaInvestimento">
+			<result name="search">GestioneAreaInvestimento/PgsGestioneAreaInvestimento.jsp
+			</result>
+			<result name="nuovomodifica">GestioneAreaInvestimento/PgsGestioneAreaInvestimentoNuovoModifica.jsp
+			</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+
+		<action name="BudgetAct" class="controller.BudgetAction">
+			<result name="input">Applicazione/PgsBudgetMain.jsp</result>
+			<result type="redirectAction" name="DefinizioneRedirect">DefinizioneAction</result>
+			<result type="redirectAction" name="RiconciliazioneRedirect">RiconciliazioneAction
+			</result>
+			<result type="redirectAction" name="AvanzamentoRedirect">AvanzamentoAction</result>
+			<result type="redirectAction" name="SpesaInvestimentoRedirect">SpesaInvestimentoAction
+			</result>
+		</action>
+
+		<action name="AvanzamentoAction"
+			class="controller.AvanzamentoBudget">
+			<result name="search">GestioneBudget/Avanzamento/PgsGestioneAvanzamento.jsp
+			</result>
+			<result name="avanzamento">GestioneBudget/Avanzamento/PgsGestioneAvanzamentoRicerca.jsp
+			</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+
+		<action name="RiconciliazioneAction"
+			class="controller.RiconciliazioneBudget">
+			<result name="search">GestioneBudget/Riconciliazione/GestioneRiconciliazione.jsp
+			</result>
+			<result name="riconciliazione">GestioneBudget/Riconciliazione/GestioneRiconciliazioneOK.jsp
+			</result>
+			<result type="redirectAction" name="annulla">BudgetAct</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+
+		<action name="SpesaInvestimentoAction"
+			class="controller.GestioneSpesaInvestimento">
+			<result name="search">GestioneSpesaInvestimento/PgsGestioneSpesaInvestimento.jsp
+			</result>
+			<result name="cerca">GestioneSpesaInvestimento/PgsGestioneSpesaInvestimentoCerca.jsp
+			</result>
+			<result name="nuovomodifica">GestioneSpesaInvestimento/PgsGestioneSpesaInvestimentoNuovoModifica.jsp
+			</result>
+		</action>
+
+		<action name="DefinizioneAction"
+			class="controller.DefinizioneBudget">
+			<result name="search">GestioneBudget/Definizione/PgsDefinizioneBudget.jsp
+			</result>
+			<result name="ricerca">GestioneBudget/Definizione/PgsDefinizioneBudgetRicerca.jsp
+			</result>
+			<result name="definizione">GestioneBudget/Definizione/PgsDefinizioneBudgetSottoCategoria.jsp
+			</result>
+			<result type="redirectAction" name="gestionebudget">BudgetAct</result>
+			<result type="redirectAction" name="sottocategoria">SottoCategoriaAct</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+
+		<action name="AliquotaIvaAct"
+			class="controller.GestioneAliquotaIva">
+			<result name="search">GestioneAliquotaIva/PgsGestioneAliquotaIva.jsp
+			</result>
+			<result name="nuovomodifica">GestioneAliquotaIva/PgsGestioneAliquotaIvaNuovoModifica.jsp
+			</result>
+		</action>
+
+		<action name="AreaAct" class="controller.GestioneArea">
+			<result name="search">GestioneArea/PgsGestioneArea.jsp</result>
+			<result name="nuovomodifica">GestioneArea/PgsGestioneAreaNuovoModifica.jsp
+			</result>
+		</action>
+
+		<action name="FornitoreAct"
+			class="controller.GestioneFornitore">
+			<result name="search">GestioneFornitore/PgsGestioneFornitore.jsp
+			</result>
+			<result name="nuovomodifica">GestioneFornitore/PgsGestioneFornitoreNuovoModifica.jsp
+			</result>
+		</action>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<action name="FatturaPassivaAct"
+			class="controller.GestioneFatturaPassiva">
+			<result name="input">GestioneFatturaPassiva/PgsGestioneFatturaPassiva.jsp
+			</result>
+			<result type="redirectAction" name="GestioneFatRedirect">GestioneFatAct</result>
+			<result type="redirectAction" name="RicercaFatRedirect">RicercaFatAct</result>
+		</action>
+
+		<action name="GestioneFatAct"
+			class="controller.GestioneFattura">
+			<result name="search">GestioneFatturaPassiva/PgsFatturaPassiva.jsp
+			</result>
+			<result name="gestione">GestioneFatturaPassiva/PgsFatturaPassivaNuovoModifica.jsp
+			</result>
+			<result name="nuovo">GestioneFatturaPassiva/PgsFatturaPassivaNuovo.jsp
+			</result>
+			<result name="nuovoDettaglio">GestioneFatturaPassiva/PgsFatturaPassivaNuovoDettaglio.jsp
+			</result>
+			<result name="eliminaDettaglio">GestioneFatturaPassiva/PgsFatturaPassivaNuovoDettaglio.jsp
+			</result>
+			<result name="gestioneDettaglio">GestioneFatturaPassiva/PgsDettaglio.jsp</result>
+			<result name="nuovoConDettagli">GestioneFatturaPassiva/PgsNuovoConDettagli.jsp
+			</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+
+
+
+		<action name="RicercaFatAct" class="controller.RicercaFattura">
+			<result name="input">GestioneFatturaPassiva/PgsRicercaFattura.jsp
+			</result>
+			<result type="redirectAction" name="SottoCategoriaFatRedirect">SottoCategoriaFatAct
+			</result>
+			<result type="redirectAction" name="FornitoreFatRedirect">FornitoreFatAct</result>
+			<result type="redirectAction" name="PreventivoFatRedirect">PreventivoFatAct</result>
+		</action>
+		<action name="SottoCategoriaFatAct"
+			class="controller.RicercaFatturaPerSottoCategoria">
+			<result name="search">GestioneFatturaPassiva/PgsRicercaFatturaPerSottoCategoria.jsp
+			</result>
+			<result name="cerca">GestioneFatturaPassiva/PgsElencoFatturaPerSottoCategoria.jsp
+			</result>
+		</action>
+
+		<action name="FornitoreFatAct"
+			class="controller.RicercaFatturaPerFornitore">
+			<result name="search">GestioneFatturaPassiva/PgsRicercaFatturaPerFornitore.jsp
+			</result>
+			<result name="cerca">GestioneFatturaPassiva/PgsElencoFatturaPerFornitore.jsp
+			</result>
+		</action>
+
+		<action name="PreventivoFatAct"
+			class="controller.RicercaFatturaPerPreventivo">
+			<result name="search">GestioneFatturaPassiva/PgsRicercaFatturaPerPreventivo.jsp
+			</result>
+			<result name="cerca">GestioneFatturaPassiva/PgsElencoFatturaPerPreventivo.jsp
+			</result>
+		</action>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<action name="OrdineAcquistoAct"
+			class="controller.GestioneOrdineAcquisto">
+			<result name="input">GestioneOrdineAcquisto/PgsGestioneOrdineAcquisto.jsp
+			</result>
+			<result type="redirectAction" name="GestioneOrdRedirect">GestioneOrdAct</result>
+			<result type="redirectAction" name="RicercaOrdRedirect">RicercaOrdAct</result>
+		</action>
+
+		<action name="GestioneOrdAct" class="controller.GestioneOrdine">
+			<result name="search">GestioneOrdineAcquisto/PgsOrdineAcquisto.jsp
+			</result>
+			<result name="gestione">GestioneOrdineAcquisto/PgsOrdineAcquistoNuovoModifica.jsp
+			</result>
+			<result name="nuovo">GestioneOrdineAcquisto/PgsOrdineAcquistoNuovo.jsp
+			</result>
+			<result name="nuovaSpesa">GestioneOrdineAcquisto/PgsOrdineAcquistoNuovaSpesa.jsp
+			</result>
+			<result name="eliminaSpesa">GestioneOrdineAcquisto/PgsOrdineAcquistoNuovaSpesa.jsp
+			</result>
+			<result name="gestioneDettaglio">GestioneOrdineAcquisto/PgsDettaglio.jsp</result>
+			<result name="nuovoConDettagli">GestioneOrdineAcquisto/PgsNuovoConDettagli.jsp
+			</result>
+			<result type="redirectAction" name="cambiaAnno">selectAnno</result>
+		</action>
+
+		<action name="RicercaOrdAct" class="controller.RicercaOrdine">
+			<result name="input">GestioneOrdineAcquisto/PgsRicercaOrdine.jsp
+			</result>
+			<result type="redirectAction" name="FornitoreOrdRedirect">FornitoreOrdAct</result>
+			<result type="redirectAction" name="ProgettoOrdRedirect">ProgettoOrdAct</result>
+			<result type="redirectAction" name="SottoCategoriaOrdRedirect">SottoCategoriaOrdAct
+			</result>
+		</action>
+
+		<action name="FornitoreOrdAct"
+			class="controller.RicercaOrdinePerFornitore">
+			<result name="search">GestioneOrdineAcquisto/PgsRicercaOrdinePerFornitore.jsp
+			</result>
+			<result name="cerca">GestioneOrdineAcquisto/PgsElencoOrdinePerFornitore.jsp
+			</result>
+		</action>
+
+		<action name="ProgettoOrdAct"
+			class="controller.RicercaOrdinePerProgetto">
+			<result name="search">GestioneOrdineAcquisto/PgsRicercaOrdinePerProgetto.jsp
+			</result>
+			<result name="cerca">GestioneOrdineAcquisto/PgsElencoOrdinePerProgetto.jsp
+			</result>
+		</action>
+
+		<action name="SottoCategoriaOrdAct"
+			class="controller.RicercaOrdinePerSottoCategoria">
+			<result name="search">GestioneOrdineAcquisto/PgsRicercaOrdinePerSottoCategoria.jsp
+			</result>
+			<result name="cerca">GestioneOrdineAcquisto/PgsElencoOrdinePerSottoCategoria.jsp
+			</result>
+		</action>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<action name="PreventivoAct"
+			class="controller.GestionePreventivo">
+			<result name="search">GestionePreventivo/PgsCercaPreventivo.jsp
+			</result>
+			<result name="cerca">GestionePreventivo/PgsGestionePreventivo.jsp
+			</result>
+			<result name="nuovomodifica">GestionePreventivo/PgsGestionePreventivoNuovoModifica.jsp
+			</result>
+		</action>
+
+		<action name="ProgettoAct" class="controller.GestioneProgetto">
+			<result name="search">GestioneProgetto/PgsGestioneProgetto.jsp</result>
+			<result name="nuovomodifica">GestioneProgetto/PgsGestioneProgettoNuovoModifica.jsp
+			</result>
+		</action>
+
+		<action name="SottoCategoriaAct"
+			class="controller.GestioneSottoCategoria">
+			<result name="search">GestioneSottoCategoria/PgsGestioneSottoCategoria.jsp
+			</result>
+			<result name="nuovomodifica">GestioneSottoCategoria/PgsGestioneSottoCategoriaNuovoModifica.jsp
+			</result>
+		</action>
+
+		<action name="SpesaInvestimentoAct"
+			class="controller.GestioneSpesaInvestimento">
+			<result name="search">GestioneSpesaInvestimento/PgsGestioneSpesaInvestimento.jsp
+			</result>
+			<result name="nuovomodifica">GestioneSpesaInvestimento/PgsGestioneSpesaInvestimentoNuovoModifica.jsp
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,9 @@
+1576491010849	Rename field 'age'
+1576491016360	Rename field 'name'
+1576491023979	Rename field 'nome'
+1576495151830	Rename type 'Person'
+1576495223903	Delete element
+1576495247333	Rename type 'PersonService'
+1576495262792	Rename type 'PersonServiceImpl'
+1576495277621	Rename type 'PersonUtils'
+1576570614139	Rename local variable 'ofornitore'

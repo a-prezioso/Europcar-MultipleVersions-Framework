@@ -1,0 +1,12 @@
+127.0.0.1 - - [15/Apr/2020:16:37:16 +0200] "GET / HTTP/1.1" 404 1073
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:16:37:19 +0200] "GET /WebHbEuropeCarStruts2/ HTTP/1.1" 200 673
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:16:37:24 +0200] "GET /console HTTP/1.1" 404 1080
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:16:37:35 +0200] "GET / HTTP/1.1" 404 1073
+127.0.0.1 - - [15/Apr/2020:16:39:19 +0200] "GET /WebHbEuropeCarStruts2/ HTTP/1.1" 200 629
+127.0.0.1 - - [15/Apr/2020:16:40:35 +0200] "POST /WebHbEuropeCarStruts2/Login.action HTTP/1.1" 302 -
+127.0.0.1 - - [15/Apr/2020:16:40:35 +0200] "GET /WebHbEuropeCarStruts2/selectAnno.action HTTP/1.1" 200 762
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:16:41:46 +0200] "GET /manager HTTP/1.1" 404 1080
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:16:41:47 +0200] "GET /favicon.ico HTTP/1.1" 404 1084
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:16:42:30 +0200] "GET /manager/html HTTP/1.1" 404 1085
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:17:44:50 +0200] "GET /WebHbEuropeCarStruts2/ HTTP/1.1" 404 1050
+0:0:0:0:0:0:0:1 - - [15/Apr/2020:17:45:07 +0200] "GET /WebHbEuropeCarStruts2/ HTTP/1.1" 404 1050

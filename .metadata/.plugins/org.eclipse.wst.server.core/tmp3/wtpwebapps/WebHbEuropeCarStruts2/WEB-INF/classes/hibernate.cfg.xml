@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+
+		<!-- db Localhost -->
+		<property name="hibernate.connection.username">Cors6</property>
+		<property name="hibernate.connection.password">Cors6</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@teramo.digitalbusinessolution.com:1522:orcl</property>
+		<!-- teramo.digitalbusinessolution.com:1522:orcl -->
+		<!-- Cors6 Cors6 -->
+		<!-- 192.168.0.101:1521:DATABASE  -->
+		<!-- AREAS_CMP AREAS_CMP -->
+	
+
+		<!-- configuration pool via c3p0 -->
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">100</property> <!-- seconds -->
+		<property name="hibernate.c3p0.max_size">10</property>
+		<property name="hibernate.c3p0.max_statements">10</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<property name="hibernate.c3p0.timeout">15000</property> <!-- seconds -->
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- ********************* AUTO CREATE DB TABLES ******************************** -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+
+		<!-- MAPPING delle RISORSE -->
+		<!-- <mapping resource="resource/db/PersonaTest.hbm.xml" /> -->
+		<mapping class="model.session.AliquotaIva" />
+
+		<mapping class="model.session.Area" />
+
+		<mapping class="model.session.AreaInvestimento" />
+
+		<mapping class="model.session.FatturaPassiva" />
+
+		<mapping class="model.session.Fornitore" />
+
+		<mapping class="model.session.OrdineAcquisto" />
+
+		<mapping class="model.session.Preventivo" />
+
+		<mapping class="model.session.Progetto" />
+
+		<mapping class="model.session.SottoCategoria" />
+
+		<mapping class="model.session.SpesaInvestimento" />
+
+		<mapping class="model.session.FatturaPassivaDettaglio" />
+
+		<mapping class="model.session.OrdineDiAcquistoDettaglio" />
+
+		<mapping class="model.session.Azienda" />
+
+		<mapping class="model.session.Gruppo" />
+
+		<mapping class="model.session.Venditore" />
+
+		<mapping class="model.session.Previsione" />
+
+		<mapping class="model.session.Utente" />
+
+		<mapping class="model.session.TipoVenditore" />
+
+		<mapping class="model.session.AnnoContabile" />
+
+		<mapping class="model.session.DistintaPagamento" />
+
+
+	</session-factory>
+</hibernate-configuration>

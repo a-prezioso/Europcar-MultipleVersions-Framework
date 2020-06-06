@@ -1,0 +1,665 @@
+package controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+import model.dao.AreaInvestimentoService;
+import model.dao.AreaService;
+import model.dao.AziendaService;
+import model.dao.PrevisioneDAO;
+import model.dao.PrevisioneService;
+import model.dao.SottoCategoriaService;
+import model.dao.TipoVenditoreService;
+import model.dao.VenditoreService;
+import model.session.AnnoContabile;
+import model.session.Area;
+import model.session.Azienda;
+import model.session.Previsione;
+import model.session.SottoCategoria;
+import model.session.TipoVenditore;
+import model.session.Utente;
+import model.session.Venditore;
+
+public class GestioneVenditore extends ActionSupport implements SessionAware {
+	VenditoreService oVenditoreService = new VenditoreService();
+	TipoVenditoreService oTipoVenditoreService = new TipoVenditoreService();
+	PrevisioneService oPrevisioneService = new PrevisioneService();
+	AreaService oAreaServcie = new AreaService();
+	AziendaService oAziendaService = new AziendaService();
+	// Attributi
+	public static final String KEY_OBJ = "oggetto";
+	public static final String KEY_LIST = "lista";
+	public static final String KEY_TIPO = "listatipivenditori";
+	public static final String KEY_OBJT = "oggettotipo";
+	public static final String KEY_AREA = "listaaree";
+	public static final String KEY_AZIENDA = "listaaziende";
+	public static final String KEY_OBJ2 = "oggetto2";
+	public static final String KEY_VENDITORE = "idvenditore";
+	public static final String KEY_SOTTOCATEGORIA ="listasottocategorie";
+	public static final String KEY_OGGETTOANNO = "oggettoanno";
+	public static final String KEY_DATAINIZIO = "datain";
+	public static final String KEY_DATAFINE = "datafi";
+	private SessionMap<String, Object> sessionMap;
+	public static final String KEY_OBJPR="oggettopr";
+	private String idarea;
+	private String idazienda;
+	private String idsottocategoria;
+	private String chiave;
+	private String cognomev;
+	private String nomev;
+	private String indirizzov;
+	private String numTel;
+	private String idtipovenditore;
+	private Venditore oVenditore;
+	private String tipov;
+    private String chiaveprevisionale;
+    private Date datavisita;
+	private Date annodiriferimento;
+	private Date dataregistrazione;
+    private String confidenza;
+    private String potenzialeeuropecar;
+    private String potenzialeazienda;
+    private String shareante;
+    private String sharepost;
+    private String shareavis;
+    private String sharehertz;
+    private String sharemaggiore;
+    private String sharesixt;
+    
+
+	// Get e Set
+
+    
+	public SessionMap<String, Object> getSessionMap() {
+		return sessionMap;
+	}
+
+	public String getIdsottocategoria() {
+		return idsottocategoria;
+	}
+
+	public void setIdsottocategoria(String idsottocategoria) {
+		this.idsottocategoria = idsottocategoria;
+	}
+
+	public void setSessionMap(SessionMap<String, Object> sessionMap) {
+		this.sessionMap = sessionMap;
+	}
+
+	public String getChiaveprevisionale() {
+		return chiaveprevisionale;
+	}
+
+	public void setChiaveprevisionale(String chiaveprevisionale) {
+		this.chiaveprevisionale = chiaveprevisionale;
+	}
+	public Date getDatavisita() {
+		return datavisita;
+	}
+
+	public void setDatavisita(Date datavisita) {
+		this.datavisita = datavisita;
+	}
+
+	public Date getAnnodiriferimento() {
+		return annodiriferimento;
+	}
+
+	public void setAnnodiriferimento(Date annodiriferimento) {
+		this.annodiriferimento = annodiriferimento;
+	}
+
+	public Date getDataregistrazione() {
+		return dataregistrazione;
+	}
+
+	public void setDataregistrazione(Date dataregistrazione) {
+		this.dataregistrazione = dataregistrazione;
+	}
+
+	public String getConfidenza() {
+		return confidenza;
+	}
+
+	public void setConfidenza(String confidenza) {
+		this.confidenza = confidenza;
+	}
+
+	public String getPotenzialeeuropecar() {
+		return potenzialeeuropecar;
+	}
+
+	public void setPotenzialeeuropecar(String potenzialeeuropecar) {
+		this.potenzialeeuropecar = potenzialeeuropecar;
+	}
+
+	public String getPotenzialeazienda() {
+		return potenzialeazienda;
+	}
+
+	public void setPotenzialeazienda(String potenzialeazienda) {
+		this.potenzialeazienda = potenzialeazienda;
+	}
+
+	public String getShareante() {
+		return shareante;
+	}
+
+	public void setShareante(String shareante) {
+		this.shareante = shareante;
+	}
+
+	public String getSharepost() {
+		return sharepost;
+	}
+
+	public void setSharepost(String sharepost) {
+		this.sharepost = sharepost;
+	}
+
+	public String getShareavis() {
+		return shareavis;
+	}
+
+	public void setShareavis(String shareavis) {
+		this.shareavis = shareavis;
+	}
+
+	public String getSharehertz() {
+		return sharehertz;
+	}
+
+	public void setSharehertz(String sharehertz) {
+		this.sharehertz = sharehertz;
+	}
+
+	public String getSharemaggiore() {
+		return sharemaggiore;
+	}
+
+	public void setSharemaggiore(String sharemaggiore) {
+		this.sharemaggiore = sharemaggiore;
+	}
+
+	public String getSharesixt() {
+		return sharesixt;
+	}
+
+	public void setSharesixt(String sharesixt) {
+		this.sharesixt = sharesixt;
+	}
+
+	public String getChiave() {
+		return chiave;
+	}
+
+	public String getIdarea() {
+		return idarea;
+	}
+
+	public void setIdarea(String idarea) {
+		this.idarea = idarea;
+	}
+
+	public String getIdazienda() {
+		return idazienda;
+	}
+
+	public void setIdazienda(String idazienda) {
+		this.idazienda = idazienda;
+	}
+
+	public String getTipov() {
+		return tipov;
+	}
+
+	public void setTipov(String tipov) {
+		this.tipov = tipov;
+	}
+
+	public void setChiave(String chiave) {
+		this.chiave = chiave;
+	}
+
+	public String getCognomev() {
+		return cognomev;
+	}
+
+	public void setCognomev(String cognomev) {
+		this.cognomev = cognomev;
+	}
+
+	public String getNomev() {
+		return nomev;
+	}
+
+	public void setNomev(String nomev) {
+		this.nomev = nomev;
+	}
+
+	public String getIndirizzov() {
+		return indirizzov;
+	}
+
+	public void setIndirizzov(String indirizzov) {
+		this.indirizzov = indirizzov;
+	}
+
+	public String getNumTel() {
+		return numTel;
+	}
+
+	public void setNumTel(String numTel) {
+		this.numTel = numTel;
+	}
+
+	public String getIdtipovenditore() {
+		return idtipovenditore;
+	}
+
+	public void setIdtipovenditore(String idtipovenditore) {
+		this.idtipovenditore = idtipovenditore;
+	}
+
+	public Venditore getoVenditore() {
+		return oVenditore;
+	}
+
+	public void setoVenditore(Venditore oVenditore) {
+		this.oVenditore = oVenditore;
+	}
+
+	// Metodi
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		this.sessionMap = (SessionMap<String, Object>) arg0;
+	}
+
+	public String execute() {
+		Utente oUtente = (Utente) sessionMap.get(KEY_OBJ2);
+		if (oUtente.isAdmin())
+			sessionMap.put(KEY_LIST, oVenditoreService.findAll());
+		else
+			sessionMap.put(KEY_LIST, oUtente.getOvenditore());
+		return "search";
+	}
+
+	public String nuovoVenditore() {
+		HashMap<String, String> mapTipoVenditore = new HashMap<String, String>() {
+			{
+				put(String.valueOf(0), "Seleziona il Tipo di Venditore: ");
+				List<TipoVenditore> elencoTipiVenditori = oTipoVenditoreService.findAll();
+				for (int i = 0; i < elencoTipiVenditori.size(); i++) {
+					put(String.valueOf(elencoTipiVenditori.get(i).getIdtipovenditore()),
+							elencoTipiVenditori.get(i).getTipovenditore());
+				}
+			}
+		};
+		sessionMap.put(KEY_OBJ2, (Utente) sessionMap.get(KEY_OBJ2));
+		sessionMap.put(KEY_TIPO, mapTipoVenditore);
+		sessionMap.put(KEY_OBJ, new Venditore());
+		String result = "nuovomodifica";
+		return result;
+	}
+
+	public String modificaVenditore() {
+		if(this.chiave != null) {
+		HashMap<String, String> mapTipoVenditore = new HashMap<String, String>() {
+			{
+				put(String.valueOf(0), "Seleziona il Tipo di Venditore: ");
+				List<TipoVenditore> elencoTipiVenditori = oTipoVenditoreService.findAll();
+				for (int i = 0; i < elencoTipiVenditori.size(); i++) {
+					put(String.valueOf(elencoTipiVenditori.get(i).getIdtipovenditore()),
+							elencoTipiVenditori.get(i).getTipovenditore());
+				}
+			}
+		};
+		sessionMap.put(KEY_OBJ2, (Utente) sessionMap.get(KEY_OBJ2));
+		sessionMap.put(KEY_TIPO, mapTipoVenditore);
+		sessionMap.put(KEY_OBJ, oVenditoreService.findById(Integer.parseInt(this.chiave.replace("\'", ""))));
+		return "nuovomodifica"; }
+		else {
+			addActionError("Selezionare un venditore per poterlo modificare:");
+			return execute();
+		}
+	}
+
+	public String eliminaVenditore() {
+		if(this.chiave != null) 
+		oVenditoreService.deleteOj(oVenditoreService.findById(Integer.parseInt(this.chiave.replace("\'", ""))));
+		else
+			addActionError("Selezionare un venditore per eliminarlo");
+		return execute();
+	}
+
+	public String annulla() {
+		return execute();
+	}
+
+	public String registraVenditore() {
+		Venditore oVenditore = (Venditore) sessionMap.get(KEY_OBJ);
+		oVenditore.setNome(this.nomev);
+		oVenditore.setCognome(this.cognomev);
+		oVenditore.setIndirizzo(this.indirizzov);
+		oVenditore.setNumerotelefono(this.numTel);
+		oVenditore.setOtipovenditore(
+				oTipoVenditoreService.findById(Integer.parseInt(this.idtipovenditore.replace("\'", ""))));
+		oVenditoreService.persistOrUpdate(oVenditore);
+		return execute();
+	}
+
+	public String nuovoTipoVenditore() {
+		sessionMap.put(KEY_OBJT, new TipoVenditore());
+		Venditore oVenditore = (Venditore) sessionMap.get(KEY_OBJ);
+		oVenditore.setCognome(this.cognomev);
+		oVenditore.setIndirizzo(this.indirizzov);
+		oVenditore.setNome(this.nomev);
+		oVenditore.setNumerotelefono(this.numTel);
+		oVenditore.setOtipovenditore(
+				oTipoVenditoreService.findById(Integer.parseInt(this.idtipovenditore.replace("\'", ""))));
+		String result = "nuovomodificatipo";
+		return result;
+	}
+
+	public String modificaTipoVenditore() {
+		sessionMap.put(KEY_OBJT,
+				oTipoVenditoreService.findById(Integer.parseInt(this.idtipovenditore.replace("\'", ""))));
+		String result = "nuovomodificatipo";
+		return result;
+	}
+
+	public String eliminaTipoVenditore() {
+		oTipoVenditoreService
+				.deleteOj(oTipoVenditoreService.findById(Integer.parseInt(this.idtipovenditore.replace("\'", ""))));
+		String result = "nuovomodificatipo";
+		return result;
+	}
+
+	public String registraTipoVenditore() {
+		TipoVenditore oTipoVenditore = new TipoVenditore();
+		oTipoVenditore.setTipovenditore(this.tipov);
+		oTipoVenditoreService.persistOrUpdate(oTipoVenditore);
+		HashMap<String, String> mapTipoVenditore = new HashMap<String, String>() {
+			{
+				put(String.valueOf(0), "Seleziona il Tipo di Venditore: ");
+				List<TipoVenditore> elencoTipiVenditori = oTipoVenditoreService.findAll();
+				for (int i = 0; i < elencoTipiVenditori.size(); i++) {
+					put(String.valueOf(elencoTipiVenditori.get(i).getIdtipovenditore()),
+							elencoTipiVenditori.get(i).getTipovenditore());
+				}
+			}
+		};
+		sessionMap.put(KEY_TIPO, mapTipoVenditore);
+		return "nuovomodifica";
+	}
+
+	public String indietro() {
+		return "nuovomodifica";
+	}
+
+	public List<Previsione> elencoPrevisioni(Venditore ovenditore) {
+		PrevisioneDAO dao = new PrevisioneService().createDAO();
+		dao.openCurrentSessionwithTransaction();
+		Criteria criteria = dao.getCurrentSession().createCriteria(Previsione.class).createAlias("ovenditore", "o")
+				.add(Restrictions.eq("o.idvenditore", Integer.parseInt(this.chiave.replace("\'", ""))));
+		List<Previsione> result = criteria.list();
+		dao.closeCurrentSessionwithTransaction();
+		return result;
+	}
+
+	public String previsionalePerVenditore() {
+		if(this.chiave != null) {
+		HashMap<String, String> mapAzienda = new HashMap<String, String>() {
+			{
+				put(String.valueOf(0), "Seleziona Azienda: ");
+				List<Azienda> elencoAziende = oAziendaService.findAll();
+				for (int i = 0; i < elencoAziende.size(); i++) {
+					put(String.valueOf(elencoAziende.get(i).getIdazienda()), elencoAziende.get(i).getRagioneSociale());
+				}
+			}
+		};
+		HashMap<String, String> mapArea = new HashMap<String, String>() {
+			{
+				put(String.valueOf(0), "Seleziona Area: ");
+				List<Area> elencoAree = oAreaServcie.findAll();
+				for (int i = 0; i < elencoAree.size(); i++) {
+					put(String.valueOf(elencoAree.get(i).getIdarea()), elencoAree.get(i).getArea());
+				}
+			}
+		};
+		Venditore ovenditore = new VenditoreService().findById(Integer.parseInt(this.chiave.replace("\'", "")));
+		sessionMap.put(KEY_AREA, mapArea);
+		sessionMap.put(KEY_AZIENDA, mapAzienda);
+		sessionMap.put(KEY_OBJ, ovenditore);
+		sessionMap.put(KEY_OBJ2, sessionMap.get(KEY_OBJ2));
+		List<Previsione> elenco = this.elencoPrevisioni(ovenditore);
+		List<Previsione> result = new ArrayList<Previsione>();
+		AnnoContabile oAnnoContabile = (AnnoContabile)sessionMap.get(KEY_OGGETTOANNO);
+		sessionMap.put(KEY_DATAINIZIO, oAnnoContabile.getDatainizio());
+		sessionMap.put(KEY_DATAFINE, oAnnoContabile.getDatafine());
+		for(int i=0; i<elenco.size();i++) {
+			if(elenco.get(i).getDataregistrazione().getTime()>=oAnnoContabile.getDatainizio().getTime()&&elenco.get(i).getDataregistrazione().getTime()<=oAnnoContabile.getDatafine().getTime()) {
+				result.add(elenco.get(i));
+			}
+		}
+		sessionMap.put(KEY_LIST, result);
+		return "ricercapervenditore"; }
+		else {
+			addActionError("Selezionare un venditore per poter visualizzare i previsionali per quel venditore");
+			return execute();
+		}
+	}
+	
+	public List<Previsione> elencoPrevisioniPerAreaAzienda(Venditore ovenditore) {
+		PrevisioneDAO dao = new PrevisioneService().createDAO();
+		dao.openCurrentSessionwithTransaction();
+		Criteria criteria = dao.getCurrentSession().createCriteria(Previsione.class)
+				.add(Restrictions.eq("ovenditore.idvenditore", ovenditore.getIdvenditore()))
+				.add(Restrictions.eq("oarea.idarea", Integer.parseInt(this.idarea.replace("\'", ""))))
+				.add(Restrictions.eq("oazienda.idazienda", Integer.parseInt(this.idazienda.replace("\'", ""))));
+		List<Previsione> result = criteria.list();
+		dao.closeCurrentSessionwithTransaction();
+		return result;
+	}
+	public List<Previsione> elencoPrevisioniPerArea(Venditore ovenditore) {
+		PrevisioneDAO dao = new PrevisioneService().createDAO();
+		dao.openCurrentSessionwithTransaction();
+		Criteria criteria = dao.getCurrentSession().createCriteria(Previsione.class)
+				.add(Restrictions.eq("ovenditore.idvenditore", ovenditore.getIdvenditore()))
+				.add(Restrictions.eq("oarea.idarea", Integer.parseInt(this.idarea.replace("\'", ""))));
+		List<Previsione> result = criteria.list();
+		dao.closeCurrentSessionwithTransaction();
+		return result;
+	}
+	public List<Previsione> elencoPrevisioniPerAzienda(Venditore ovenditore) {
+		PrevisioneDAO dao = new PrevisioneService().createDAO();
+		dao.openCurrentSessionwithTransaction();
+		Criteria criteria = dao.getCurrentSession().createCriteria(Previsione.class)
+				.add(Restrictions.eq("ovenditore.idvenditore",ovenditore.getIdvenditore()))
+				.add(Restrictions.eq("oazienda.idazienda", Integer.parseInt(this.idazienda.replace("\'", ""))));
+		List<Previsione> result = criteria.list();
+		dao.closeCurrentSessionwithTransaction();
+		return result;
+	}
+
+	public String ricercaPerAreaAzienda() {
+		HashMap<String, String> mapAzienda = new HashMap<String, String>() {
+			{
+				put(String.valueOf(0), "Seleziona Azienda: ");
+				List<Azienda> elencoAziende = oAziendaService.findAll();
+				for (int i = 0; i < elencoAziende.size(); i++) {
+					put(String.valueOf(elencoAziende.get(i).getIdazienda()), elencoAziende.get(i).getRagioneSociale());
+				}
+			}
+		};
+		HashMap<String, String> mapArea = new HashMap<String, String>() {
+			{
+				put(String.valueOf(0), "Seleziona Area: ");
+				List<Area> elencoAree = oAreaServcie.findAll();
+				for (int i = 0; i < elencoAree.size(); i++) {
+					put(String.valueOf(elencoAree.get(i).getIdarea()), elencoAree.get(i).getArea());
+				}
+			}
+		};
+		sessionMap.put(KEY_AREA, mapArea);
+		sessionMap.put(KEY_AZIENDA, mapAzienda);
+		Venditore ovenditore = (Venditore) sessionMap.get(KEY_OBJ);
+		sessionMap.put(KEY_OBJ, ovenditore);
+		sessionMap.put(KEY_OBJ2, sessionMap.get(KEY_OBJ2));
+		if(Integer.parseInt(this.idazienda)!=0 & Integer.parseInt(this.idarea)!= 0) 
+			sessionMap.put(KEY_LIST,this.elencoPrevisioniPerAreaAzienda(ovenditore));
+		else if(Integer.parseInt(this.idazienda)==0 & Integer.parseInt(this.idarea)!= 0)
+			sessionMap.put(KEY_LIST,this.elencoPrevisioniPerArea(ovenditore));
+		else
+			sessionMap.put(KEY_LIST,this.elencoPrevisioniPerAzienda(ovenditore));
+		
+		return "ricercapervenditore";
+	}
+
+	
+	
+	public String registraPrevisionale() {
+        Previsione oPrevisione = (Previsione)sessionMap.get(KEY_OBJPR);
+        oPrevisione.setOarea((new AreaService().findById(Integer.parseInt(this.idarea))));
+		oPrevisione.setOsottocategoria(new SottoCategoriaService().findById(Integer.parseInt(this.idsottocategoria.replace("\'",""))));	
+        oPrevisione.setOazienda(new AziendaService().findById(Integer.parseInt(this.idazienda)));
+        //oPrevisione.setOvenditore(oVenditoreService.findById(Integer.parseInt(this.chiave.replace("\'",""))));
+        oPrevisione.setOvenditore((Venditore) sessionMap.get(KEY_OBJ));
+		oPrevisione.setDataregistrazione(dataregistrazione);
+		oPrevisione.setDatavisita(this.datavisita);
+		oPrevisione.setAnnodiriferimento(this.annodiriferimento);
+        oPrevisione.setConfidenza(confidenza);
+        oPrevisione.setPotenzialeeuropecar(Float.parseFloat(potenzialeeuropecar));
+        oPrevisione.setPotenzialeazienda(Float.parseFloat(potenzialeazienda));
+        oPrevisione.setShareante(Float.parseFloat(shareante));
+        oPrevisione.setSharepost(Float.parseFloat(sharepost));
+        oPrevisione.setShareavis(Float.parseFloat(shareavis));
+        oPrevisione.setSharehertz(Float.parseFloat(sharehertz));
+        oPrevisione.setSharemaggiore(Float.parseFloat(sharemaggiore));
+        oPrevisione.setSharesixt(Float.parseFloat(sharesixt));
+        oPrevisioneService.persistOrUpdate(oPrevisione);
+        sessionMap.put(KEY_LIST, sessionMap.get(KEY_LIST));
+        Venditore oVenditore = (Venditore)sessionMap.get(KEY_OBJ);
+        this.chiave= Integer.toString(oVenditore.getIdvenditore());
+        return previsionalePerVenditore();
+        
+    }
+
+	
+	public String nuovoPrevisionale() {
+		AnnoContabile oAnnoContabile = (AnnoContabile)sessionMap.get(KEY_OGGETTOANNO);
+		sessionMap.put(KEY_DATAINIZIO, oAnnoContabile.getDatainizio());
+		sessionMap.put(KEY_DATAFINE, oAnnoContabile.getDatafine());
+        HashMap<String, String> mapArea = new HashMap<String, String>() {
+            {
+                put(String.valueOf(0), "Seleziona il Area: ");
+                List<Area> elencoAree = new AreaService().findAll();
+                for(int i=0; i < elencoAree.size();i++) {
+                    put(String.valueOf(elencoAree.get(i).getIdarea()), elencoAree.get(i).getArea());
+                }
+            }
+        };
+        HashMap<String, String> mapAzienda = new HashMap<String, String>() {
+            {
+                put(String.valueOf(0), "Seleziona il Azienda: ");
+                List<Azienda> elencoAziende = new AziendaService().findAll();
+                for(int i=0; i < elencoAziende.size();i++) {
+                    put(String.valueOf(elencoAziende.get(i).getIdazienda()), elencoAziende.get(i).getRagioneSociale());
+                }
+            }
+        };
+        HashMap<String, String> mapSottoCat = new HashMap<String, String>() {
+            {
+                put(String.valueOf(0), "Seleziona la SottoCategoria: ");
+                List<SottoCategoria> elenco = new SottoCategoriaService().findAll();
+                List<SottoCategoria> elencoSottoCategorie = new ArrayList<SottoCategoria>();
+                for(int i=0; i<elenco.size();i++) {
+                	if(elenco.get(i).getOarea().getOannocontabile().getDatainizio().getTime()>=oAnnoContabile.getDatainizio().getTime()&&elenco.get(i).getOarea().getOannocontabile().getDatafine().getTime()<=oAnnoContabile.getDatafine().getTime()) {
+                		elencoSottoCategorie.add(elenco.get(i));
+                	}
+                }
+                for(int i=0; i < elencoSottoCategorie.size();i++) {
+                    put(String.valueOf(elencoSottoCategorie.get(i).getIdsottocategoria()), elencoSottoCategorie.get(i).getSottocategoria());
+                }
+            }
+        };
+        sessionMap.put(KEY_SOTTOCATEGORIA, mapSottoCat);
+        sessionMap.put(KEY_OBJ, sessionMap.get(KEY_OBJ));
+        sessionMap.put(KEY_AREA, mapArea);
+        sessionMap.put(KEY_AZIENDA, mapAzienda);
+        sessionMap.put(KEY_OBJPR, new Previsione());
+        sessionMap.put(KEY_LIST, sessionMap.get(KEY_LIST));
+        String result="nuovomodificaprevisione";
+        return result;
+    }
+    
+
+    public String modificaPrevisionale() {
+    	AnnoContabile oAnnoContabile = (AnnoContabile)sessionMap.get(KEY_OGGETTOANNO);
+		sessionMap.put(KEY_DATAINIZIO, oAnnoContabile.getDatainizio());
+		sessionMap.put(KEY_DATAFINE, oAnnoContabile.getDatafine());
+        HashMap<String, String> mapArea = new HashMap<String, String>() {
+            {
+                put(String.valueOf(0), "Seleziona il Area: ");
+                List<Area> elencoAree = new AreaService().findAll();
+                for(int i=0; i < elencoAree.size();i++) {
+                    put(String.valueOf(elencoAree.get(i).getIdarea()), elencoAree.get(i).getArea());
+                }
+            }
+        };
+        HashMap<String, String> mapAzienda = new HashMap<String, String>() {
+            {
+                put(String.valueOf(0), "Seleziona il Azienda: ");
+                List<Azienda> elencoAziende = new AziendaService().findAll();
+                for(int i=0; i < elencoAziende.size();i++) {
+                    put(String.valueOf(elencoAziende.get(i).getIdazienda()), elencoAziende.get(i).getRagioneSociale());
+                }
+            }
+        };
+        HashMap<String, String> mapSottoCat = new HashMap<String, String>() {
+            {
+                put(String.valueOf(0), "Seleziona la SottoCategoria: ");
+                List<SottoCategoria> elenco = new SottoCategoriaService().findAll();
+                List<SottoCategoria> elencoSottoCategorie = new ArrayList<SottoCategoria>();
+                for(int i=0; i<elenco.size();i++) {
+                	if(elenco.get(i).getOarea().getOannocontabile().getDatainizio().getTime()>=oAnnoContabile.getDatainizio().getTime()&&elenco.get(i).getOarea().getOannocontabile().getDatafine().getTime()<=oAnnoContabile.getDatafine().getTime()) {
+                		elencoSottoCategorie.add(elenco.get(i));
+                	}
+                }
+                for(int i=0; i < elencoSottoCategorie.size();i++) {
+                    put(String.valueOf(elencoSottoCategorie.get(i).getIdsottocategoria()), elencoSottoCategorie.get(i).getSottocategoria());
+                }
+            }
+        };
+        sessionMap.put(KEY_SOTTOCATEGORIA, mapSottoCat);
+        sessionMap.put(KEY_LIST, sessionMap.get(KEY_LIST));
+        sessionMap.put(KEY_OBJ, sessionMap.get(KEY_OBJ));
+        sessionMap.put(KEY_AREA, mapArea);
+        sessionMap.put(KEY_AZIENDA, mapAzienda);
+        sessionMap.put(KEY_OBJPR, oPrevisioneService.findById(Integer.parseInt(this.chiaveprevisionale.replace("\'",""))));
+        String result ="nuovomodificaprevisione";
+        return result;
+    }
+    
+
+    public String eliminaPrevisionale() {
+        oPrevisioneService.deleteOj(oPrevisioneService.findById(Integer.parseInt(this.chiaveprevisionale.replace("\'", ""))));
+        sessionMap.put(KEY_LIST, sessionMap.get(KEY_LIST));
+        Venditore oVenditore = (Venditore)sessionMap.get(KEY_OBJ);
+        this.chiave= Integer.toString(oVenditore.getIdvenditore());
+        return previsionalePerVenditore();
+    }
+
+	
+	
+}
