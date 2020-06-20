@@ -18,7 +18,7 @@
 </head>
 <a class="btn btn-light" href="http://localhost:8086/menu/List" role="button">Home</a>
 <a class="btn btn-light"
-	href="http://localhost:8086/OrdineAcquisto/Cerca" role="button">Annulla</a>
+	href="http://localhost:8086/OrdineAcquisto/AnnullaModifica" role="button">Annulla</a>
 <body>
 	<div class="container">
 	<spring:url value="/OrdineAcquisto/SaveEditOrdine/" var="saveURL" />
@@ -69,6 +69,7 @@
 						<th scope="row">Importo</th>
 						<th scope="row">Quantità</th>
 						<th></th>
+						<th></th>
 					</thead>
 					<tbody>
 						<c:forEach items="${elencoDettagli}" var="elenco">
@@ -83,10 +84,20 @@
 										var="editURL" /> <a href="${editURL}" role="button"
 									class="btn btn-primary">Modifica</a>
 								</td>
+								<td><spring:url value="/OrdineAcquisto/RimuoviDettagli/${elenco.idordinediacquistodettaglio}/${elenco.identifier}" var="deleteURL" /> 
+								<a href="${deleteURL}" role="button" class="btn btn-primary">Rimuovi Dettaglio</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<br>
+				
+				<br>
+				<spring:url value="/OrdineAcquisto/AddDettagliModifica/" var="addURL" /> 
+				<a href="${addURL}" role="button" class="btn btn-primary">Aggiungi Dettaglio</a>
+				<br>
+				
+				${messaggio}
 			</div>
 			
 </body>

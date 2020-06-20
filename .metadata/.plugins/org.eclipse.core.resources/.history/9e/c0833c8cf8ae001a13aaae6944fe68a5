@@ -1,0 +1,22 @@
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.service.AreaService;
+
+@Controller
+@RequestMapping(value = "/Area")
+public class areacontr {
+	
+	@Autowired
+	AreaService areaservice;
+	
+	@RequestMapping(value = "/ListaAree") 
+	public ModelAndView listaAree() {
+		return null;
+	}
+	
+
+}

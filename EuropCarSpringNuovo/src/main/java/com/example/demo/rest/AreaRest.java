@@ -22,21 +22,15 @@ public class AreaRest {
 	@Autowired
 	AreaService areaser;
 	
-	
 
-	public AreaService getAliser() {
-		return areaser;
-	}
-
-	public void setAliser(AreaService areaser) {
-		this.areaser = areaser;
-	}
 
 	@GetMapping
 	public Iterable<Area> getAll() {
 		return areaser.getAllAree();
 	}
-
+	
+	
+		
 	@GetMapping(value = "/{id}")
 	public Area getByID(@PathVariable("id") Integer id) {
 		Area oarea = areaser.getAreaById(id);

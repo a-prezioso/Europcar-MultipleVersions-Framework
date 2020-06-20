@@ -42,6 +42,10 @@ public class Area {
 	public Venditore getOvenditore() {
 		return ovenditore;
 	}
+	
+	public void setOvenditore(Venditore ovenditore) {
+		this.ovenditore = ovenditore;
+	}
 
 	public String getArea() {
 		return area;
@@ -57,10 +61,6 @@ public class Area {
 
 	public void setIdarea(int idarea) {
 		this.idarea = idarea;
-	}
-
-	public void setOvenditore(Venditore ovenditore) {
-		this.ovenditore = ovenditore;
 	}
 
 	public String getCodice() {

@@ -1,0 +1,10 @@
+package com.example.demo;
+
+public class AreaTest {
+	
+	@Test
+	public void nuovaArea() {
+		A
+	}
+
+}

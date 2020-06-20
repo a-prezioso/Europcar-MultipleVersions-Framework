@@ -18,7 +18,7 @@
 </head>
 <a class="btn btn-light" href="http://localhost:8086/menu/List" role="button">Home</a>
 <a class="btn btn-light"
-	href="http://localhost:8086/OrdineAcquisto/Cerca" role="button">Annulla</a>
+	href="http://localhost:8086/OrdineAcquisto/Annulla" role="button">Annulla</a>
 <body>
 	<div class="container">
 	<spring:url value="/OrdineAcquisto/SaveOrdine/" var="saveURL" />
@@ -51,11 +51,13 @@
 				</form:select>
 				<form:errors path="ofornitore" cssClass="error"/>
 			</div>
-			<button type="submit" class="btn btn-primary">Salva</button>
+			<button type="submit" class="btn btn-primary">Salva</button>&nbsp;<spring:url value="/OrdineAcquisto/AddDettagliSuccessivi/" var="addURL" />
+				<a href="${addURL}" role="button" class="btn btn-primary">Nuovo Dettaglio</a>
 		</form:form>
 	</div>
-	
+
 	<br><br>	
+	<c:if test="${elencoDettagli.size() != 0 }">
 		<div class="container">
 			
 			
@@ -86,9 +88,8 @@
 					</tbody>
 				</table>
 
-				<spring:url value="/OrdineAcquisto/AddDettagliSuccessivi/" var="addURL" />
-				<a href="${addURL}" role="button" class="btn btn-primary">Nuovo Dettaglio</a>
+				
 			</div>
-			
+	</c:if>
 </body>
 </html>

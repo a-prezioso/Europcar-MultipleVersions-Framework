@@ -146,7 +146,7 @@ public class AvanzamentoBudget extends ActionSupport implements SessionAware {
 	public String execute() {
 		HashMap<String, String> mapAree = new HashMap<String, String>() {
 			{
-				put(String.valueOf(0), "Seleziona L'AreaInvestimento: ");
+				put(String.valueOf(0), "Seleziona L'Area di Investimento: ");
 				List<AreaInvestimento> elencoAree = new AreaInvestimentoService().findAll();
 				for (int i = 0; i < elencoAree.size(); i++) {
 					put(String.valueOf(elencoAree.get(i).getIdarea()), elencoAree.get(i).getArea());

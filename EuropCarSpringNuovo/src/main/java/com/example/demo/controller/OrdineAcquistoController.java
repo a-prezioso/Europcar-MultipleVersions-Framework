@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.AnnoContabile;
 import com.example.demo.model.Fornitore;
@@ -113,6 +116,17 @@ public class OrdineAcquistoController {
 		model.setViewName("OrdineAcquisto/ListaOrdini");
 		return model;
 	}
+	
+	@GetMapping(value = "/RedirectOrdine")
+	public ModelAndView redirectOrdini(HttpSession sessionObj, ModelAndView model) {
+		//////////////////////
+		Fornitore ofornitore = (Fornitore) sessionObj.getAttribute("oggettoFornitoreOrdine");
+		model.addObject("elencoFornitori", forser.getAllFornitori());
+		model.addObject("oggettoFornitoreOrdine", ofornitore);
+		model.addObject("elencoOrdini", ordser.getOrdiniPerFornitore(ofornitore.getIdfornitore(), idAnno(sessionObj)));
+		model.setViewName("OrdineAcquisto/ListaOrdini");
+		return model;
+	}
 
 	/////////////// Sezione Add
 
@@ -176,12 +190,36 @@ public class OrdineAcquistoController {
 			sessionObj.setAttribute("oggettoOrdineTemporaneo", oordine);
 			sessionObj.setAttribute("oggettoDettagliTemporanei", oordine.getDettagli());
 			model.addObject("oggettoOrdineTemporaneo", oordine);
+			
 			model.addObject("elencoDettagli", oordine.getDettagli());
 			model.addObject("elencoFornitori", forser.getAllFornitori());
 			model.setViewName("OrdineAcquisto/AddOrdineConDettagli");
 			return model;
 		}
 	}
+	
+	@GetMapping(value = "/Annulla")
+	public ModelAndView annulla(HttpSession sessionObj) {
+		ModelAndView model = new ModelAndView();
+		Fornitore ofornitore = (Fornitore) sessionObj.getAttribute("oggettoFornitoreOrdine");
+		model.addObject("elencoFornitori", forser.getAllFornitori());
+		model.addObject("oggettoFornitoreOrdine", ofornitore);
+		model.addObject("elencoOrdini", ordser.getOrdiniPerFornitore(ofornitore.getIdfornitore(), idAnno(sessionObj)));
+		model.setViewName("OrdineAcquisto/ListaOrdini");
+		return model;
+	}
+	
+	@GetMapping(value = "/AnnullaDettagli")
+	public ModelAndView annullaDettagli(HttpSession sessionObj) {
+		ModelAndView model = new ModelAndView();
+		OrdineAcquisto oordine = (OrdineAcquisto) sessionObj.getAttribute("oggettoOrdineTemporaneo");
+		model.addObject("oggettoOrdineTemporaneo", oordine);
+		model.addObject("elencoDettagli", oordine.getDettagli());
+		model.addObject("elencoFornitori", forser.getAllFornitori());
+		model.setViewName("OrdineAcquisto/AddOrdineConDettagli");
+		return model;
+	}
+
 
 	@GetMapping(value = "/RimuoviDettagliTemporanei/{identifier}")
 	public ModelAndView rimuoviDettagliTemporanei(@PathVariable Integer identifier, HttpSession sessionObj) {
@@ -204,15 +242,22 @@ public class OrdineAcquistoController {
 	@PostMapping(value = "/SaveOrdine")
 	public ModelAndView saveOrdine(@Valid @ModelAttribute("oggettoOrdineTemporaneo") OrdineAcquisto oordine,
 			BindingResult bindingresult, HttpSession sessionObj, Model modelFornitore) {
-		if (bindingresult.hasErrors()) {
-			ModelAndView model = new ModelAndView();
+		List<OrdineDiAcquistoDettaglio> dettagli = new ArrayList<OrdineDiAcquistoDettaglio>();
+		if (sessionObj.getAttribute("oggettoDettagliTemporanei") != null) {
+			dettagli = (List<OrdineDiAcquistoDettaglio>) sessionObj.getAttribute("oggettoDettagliTemporanei");
+		}
+		ModelAndView model = new ModelAndView();
+		if (bindingresult.hasErrors() || dettagli.size() == 0) {
 			OrdineAcquisto oOrdine = (OrdineAcquisto) sessionObj.getAttribute("oggettoOrdineTemporaneo");
 			model.addObject("elencoDettagli", oOrdine.getDettagli());
 			model.addObject("elencoFornitori", forser.getAllFornitori());
+			if (dettagli.size() == 0) {
+				model.addObject("messaggio",
+						"I dettagli devono essere inseriti obbligatoriamente per poter continuare");
+			}
 			model.setViewName("OrdineAcquisto/AddOrdineConDettagli");
 			return model;
 		} else {
-			List<OrdineDiAcquistoDettaglio> dettagli = (List<OrdineDiAcquistoDettaglio>) sessionObj.getAttribute("oggettoDettagliTemporanei");
 			for (int i = 0; i < dettagli.size(); i++) {
 				oordine.getDettagli().add(dettagli.get(i));
 			}
@@ -224,7 +269,8 @@ public class OrdineAcquistoController {
 			sessionObj.removeAttribute("oggettoOrdineTemporaneo");
 			sessionObj.removeAttribute("oggettoDettagliTemporanei");
 			sessionObj.removeAttribute("contatore");
-			return new ModelAndView("redirect:/OrdineAcquisto/Cerca");
+			this.redirectOrdini(sessionObj, model);
+			return model;
 		}
 	}
 
@@ -237,7 +283,9 @@ public class OrdineAcquistoController {
 		sessionObj.setAttribute("oggettoOrdineTemporaneo", oordine);
 		model.addObject("oggettoOrdineTemporaneo", oordine);
 		model.addObject("elencoDettagli", oordine.getDettagli());
+		sessionObj.setAttribute("oggettoDettagliTemporanei", oordine.getDettagli());
 		model.addObject("elencoFornitori", forser.getAllFornitori());
+		sessionObj.setAttribute("contatore", this.count = 0);
 		model.setViewName("OrdineAcquisto/EditOrdine");
 		return model;
 	}
@@ -249,6 +297,20 @@ public class OrdineAcquistoController {
 		model.addObject("elencoSpese", spesaser.getAllSpeseInvestimento());
 		model.addObject("elencoProgetti", proser.getAllProgetti());
 		model.setViewName("OrdineAcquisto/EditDettaglio");
+		return model;
+	}
+	
+	
+	
+	
+	@GetMapping(value = "/AnnullaModifica")
+	public ModelAndView annullaModifica(HttpSession sessionObj) {
+		ModelAndView model = new ModelAndView();
+		Fornitore ofornitore = (Fornitore) sessionObj.getAttribute("oggettoFornitoreOrdine");
+		model.addObject("elencoFornitori", forser.getAllFornitori());
+		model.addObject("oggettoFornitoreOrdine", ofornitore);
+		model.addObject("elencoOrdini", ordser.getOrdiniPerFornitore(ofornitore.getIdfornitore(), idAnno(sessionObj)));
+		model.setViewName("OrdineAcquisto/ListaOrdini");
 		return model;
 	}
 	
@@ -286,18 +348,27 @@ public class OrdineAcquistoController {
 
 	@PostMapping(value = "/SaveEditOrdine")
 	public ModelAndView saveEditOrdine(@Valid @ModelAttribute("oggettoOrdineTemporaneo") OrdineAcquisto oordine,
-			BindingResult bindingresult, HttpSession sessionObj, Model modelFornitore) {
-		if (bindingresult.hasErrors()) {
-			ModelAndView model = new ModelAndView();
+			BindingResult bindingresult, HttpSession sessionObj) {
+		ModelAndView model = new ModelAndView();
+		List<OrdineDiAcquistoDettaglio> dettagli = new ArrayList<OrdineDiAcquistoDettaglio>();
+		if (sessionObj.getAttribute("oggettoDettagliTemporanei") != null) {
+			dettagli = (List<OrdineDiAcquistoDettaglio>) sessionObj.getAttribute("oggettoDettagliTemporanei");
+		}
+		if (bindingresult.hasErrors() || dettagli.size() == 0) {
 			OrdineAcquisto oOrdine = (OrdineAcquisto) sessionObj.getAttribute("oggettoOrdineTemporaneo");
+			if (dettagli.size() == 0) {
+				model.addObject("messaggio",
+						"I dettagli devono essere inseriti obbligatoriamente per poter continuare");
+			}
 			model.addObject("elencoDettagli", oOrdine.getDettagli());
 			model.addObject("elencoFornitori", forser.getAllFornitori());
-			model.setViewName("OrdineAcquisto/AddOrdineConDettagli");
+			model.setViewName("OrdineAcquisto/EditOrdine");
 			return model;
 		} else {
-			List<OrdineDiAcquistoDettaglio> dettagli = new ArrayList<OrdineDiAcquistoDettaglio>();
-			if (sessionObj.getAttribute("oggettoDettagliTemporanei") != null) {
-				dettagli = (List<OrdineDiAcquistoDettaglio>) sessionObj.getAttribute("oggettoDettagliTemporanei");
+			oordine.getDettagli().clear();
+			for (OrdineDiAcquistoDettaglio dettaglio : dettagli) {
+				dettaglio.setOordineacquisto(oordine);
+				oordine.getDettagli().add(dettaglio);
 			}
 			ordser.saveOrUpdate(oordine);
 //			for (int i = 0; i < oordine.getDettagli().size(); i++) {
@@ -306,34 +377,103 @@ public class OrdineAcquistoController {
 			sessionObj.removeAttribute("oggettoOrdineTemporaneo");
 			sessionObj.removeAttribute("oggettoDettagliTemporanei");
 			sessionObj.removeAttribute("contatore");
-			return new ModelAndView("redirect:/OrdineAcquisto/Cerca");
+			this.redirectOrdini(sessionObj, model);
+			return model;
+		}
+	}
+	
+	
+	
+	
+	@GetMapping(value = "/AnnullaDettagliModifica")
+	public ModelAndView annullaDettagliModifica(HttpSession sessionObj) {
+		ModelAndView model = new ModelAndView();
+		OrdineAcquisto oordine = (OrdineAcquisto) sessionObj.getAttribute("oggettoOrdineTemporaneo");
+		model.addObject("oggettoOrdineTemporaneo", oordine);
+		model.addObject("elencoDettagli", oordine.getDettagli());
+		model.addObject("elencoFornitori", forser.getAllFornitori());
+		model.setViewName("OrdineAcquisto/EditOrdine");
+		return model;
+	}
+
+
+	@GetMapping(value = "/AddDettagliModifica/")
+	public ModelAndView addDettagliModifica() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("oggettoDettaglioTemporaneo", new OrdineDiAcquistoDettaglio());
+		model.addObject("elencoSpese", spesaser.getAllSpeseInvestimento());
+		model.addObject("elencoProgetti", proser.getAllProgetti());
+		model.setViewName("OrdineAcquisto/AddDettaglioModifica");
+		return model;
+	}
+
+	@PostMapping(value = "/SaveDettagliAggiunti")
+	public ModelAndView saveDettagliAggiunti(
+			@Valid @ModelAttribute("oggettoDettaglioTemporaneo") OrdineDiAcquistoDettaglio odettagliotemporaneo,
+			BindingResult bindingresult, HttpSession sessionObj) {
+		ModelAndView model = new ModelAndView();
+		if (bindingresult.hasErrors()) {
+			model.addObject("elencoSpese", spesaser.getAllSpeseInvestimento());
+			model.addObject("elencoProgetti", proser.getAllProgetti());
+			model.setViewName("OrdineAcquisto/EditDettaglio");
+			return model;
+		} else {
+			OrdineAcquisto oordine = (OrdineAcquisto) sessionObj.getAttribute("oggettoOrdineTemporaneo");
+//			List<OrdineDiAcquistoDettaglio> dettagli = (List<OrdineDiAcquistoDettaglio>) sessionObj.getAttribute("oggettoDettagliTemporanei");
+//			for(OrdineDiAcquistoDettaglio dettaglio : dettagli) {
+//				oordine.getDettagli().add(dettaglio);
+//			}
+			this.count = (int) sessionObj.getAttribute("contatore") + 1;
+			odettagliotemporaneo.setIdentifier(this.count);
+			sessionObj.setAttribute("contatore", this.count);
+			oordine.getDettagli().add(odettagliotemporaneo);
+			sessionObj.setAttribute("oggettoOrdineTemporaneo", oordine);
+			sessionObj.setAttribute("oggettoDettagliTemporanei", oordine.getDettagli());
+			model.addObject("oggettoOrdineTemporaneo", oordine);
+			model.addObject("elencoDettagli", oordine.getDettagli());
+			model.addObject("elencoFornitori", forser.getAllFornitori());
+			model.setViewName("OrdineAcquisto/EditOrdine");
+			return model;
 		}
 	}
 
-//	@GetMapping(value = "/AddDettagliModifica/")
-//	public ModelAndView addDettagliModifica() {
-//		ModelAndView model = new ModelAndView();
-//		model.addObject("oggettoDettaglioTemporaneo", new OrdineDiAcquistoDettaglio());
-//		model.addObject("elencoSpese", spesaser.getAllSpeseInvestimento());
-//		model.addObject("elencoProgetti", proser.getAllProgetti());
-//		model.setViewName("OrdineAcquisto/AddDettaglioModifica");
-//		return model;
-//	}
 //	
-//	@GetMapping(value = "/RimuoviDettagli/{id}") 
-//	public ModelAndView rimuoviDettagli(@PathVariable Integer id, HttpSession sessionObj) {
-//		ModelAndView model = new ModelAndView();
-//		if(sessionObj.getAttribute("chiavi") != null) {
-//			for(int i = 0; i < ((List<Integer>) sessionObj.getAttribute("chiavi")).size(); i++) {
+	@GetMapping(value = "/RimuoviDettagli/{id}/{identifier}")
+	public ModelAndView rimuoviDettagli(@PathVariable(name = "id") Integer id,
+			@PathVariable(name = "identifier") Integer identifier, HttpSession sessionObj) {
+		ModelAndView model = new ModelAndView();
+//		if (sessionObj.getAttribute("chiavi") != null) {
+//			for (int i = 0; i < ((List<Integer>) sessionObj.getAttribute("chiavi")).size(); i++) {
 //				this.chiavi.add(((List<Integer>) sessionObj.getAttribute("chiavi")).get(i));
-//			} this.chiavi.add(id);
+//			}
+//			this.chiavi.add(id);
 //			sessionObj.setAttribute("chiavi", this.chiavi);
 //		} else {
 //			sessionObj.setAttribute("chiavi", id);
 //		}
-//		model.setViewName("OrdineAcquisto/EditOrdine/{id}");
-//		return model;
-//	}
+		OrdineAcquisto oordine = (OrdineAcquisto) sessionObj.getAttribute("oggettoOrdineTemporaneo");
+		List<OrdineDiAcquistoDettaglio> dettagli = (List<OrdineDiAcquistoDettaglio>) sessionObj
+				.getAttribute("oggettoDettagliTemporanei");
+		boolean check = false;
+		if (id != null) {
+			for (int i = 0; i < dettagli.size() && !check; i++) {
+				if (id == dettagli.get(i).getIdordinediacquistodettaglio()) {
+					oordine.getDettagli().remove(dettagli.get(i));
+					check = true;
+				}
+			}
+		} else {
+			for (OrdineDiAcquistoDettaglio dettaglio : dettagli) {
+				if (identifier == dettaglio.getIdentifier())
+					oordine.getDettagli().remove(dettaglio);
+			}
+		}
+		model.addObject("oggettoOrdineTemporaneo", oordine);
+		model.addObject("elencoDettagli", oordine.getDettagli());
+		model.addObject("elencoFornitori", forser.getAllFornitori());
+		model.setViewName("OrdineAcquisto/EditOrdine");
+		return model;
+	}
 
 	///////////////////////////// Sezione Ricerca
 

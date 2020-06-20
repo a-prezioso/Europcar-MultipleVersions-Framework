@@ -27,6 +27,8 @@ public class AliquotaIva {
 	@Column(name="descrizione")
 	@NotBlank(message="Il campo non può essere vuoto")
 	private String descrizione;
+	
+	
 
 	public int getIdaliquotaiva() {
 		return idaliquotaiva;

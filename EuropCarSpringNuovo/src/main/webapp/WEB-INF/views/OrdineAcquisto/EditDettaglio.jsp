@@ -16,7 +16,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
-<a class="btn btn-light" href="http://localhost:8086/OrdineAcquisto/Cerca" role="button">Annulla</a>
+<a class="btn btn-light" href="http://localhost:8086/OrdineAcquisto/AnnullaDettagliModifica" role="button">Annulla</a>
 
 <body>
 	<div class="container">

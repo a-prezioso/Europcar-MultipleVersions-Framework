@@ -60,7 +60,7 @@
 			<form:hidden path="partitaiva" />
 			<button type="submit" class="btn btn-primary">Cerca Ordini</button>
 		</form:form>
-
+<br><br>
 		<c:if test="${oggettoFornitoreOrdine.getIdfornitore() != 0}">
 			<c:if test="${elencoOrdini.size() == 0}">
 						<table class="table table-striped">
@@ -71,6 +71,9 @@
 			<spring:url value="/OrdineAcquisto/AddOrdine/" var="addURL" />
 					<a href="${addURL}" role="button" class="btn btn-primary">Nuovo
 						Ordine</a>
+			</c:if>
+			<c:if test="${elencoOrdini.size() == 0}">
+				Non ci sono ordini
 			</c:if>
 				<c:if test="${elencoOrdini.size() != 0}">
 				<div class="container">

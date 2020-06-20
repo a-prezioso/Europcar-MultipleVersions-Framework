@@ -24,9 +24,9 @@
 		<br>
 		<div class="btn-group-vertical">
 			<a class="btn btn-primary" href="http://localhost:8086/SpesaInvestimento/ListaSpeseInvestimento" role="button">Gestione Spese</a> 
-	<!-- 	<a class="btn btn-secondary" href="http://localhost:8086/Budget/Avanzamento" role="button">Avanzamento</a> 
+	<!-- 	<a class="btn btn-secondary" href="http://localhost:8086/Budget/Avanzamento" role="button">Avanzamento</a> -->
 			<a class="btn btn-danger" href="http://localhost:8086/Budget/Riconciliazione" role="button">Riconciliazione</a>
-			<a class="btn btn-dark" href="http://localhost:8086/Budget/Definizione" role="button">Definizione</a>  -->  
+	<!--	<a class="btn btn-dark" href="http://localhost:8086/Budget/Definizione" role="button">Definizione</a>  -->  
 	
 		</div>
 	</div>
