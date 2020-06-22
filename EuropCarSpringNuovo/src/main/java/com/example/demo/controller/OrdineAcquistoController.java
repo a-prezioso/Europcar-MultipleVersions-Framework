@@ -256,6 +256,7 @@ public class OrdineAcquistoController {
 						"I dettagli devono essere inseriti obbligatoriamente per poter continuare");
 			}
 			model.setViewName("OrdineAcquisto/AddOrdineConDettagli");
+			
 			return model;
 		} else {
 			for (int i = 0; i < dettagli.size(); i++) {
@@ -269,6 +270,7 @@ public class OrdineAcquistoController {
 			sessionObj.removeAttribute("oggettoOrdineTemporaneo");
 			sessionObj.removeAttribute("oggettoDettagliTemporanei");
 			sessionObj.removeAttribute("contatore");
+			
 			this.redirectOrdini(sessionObj, model);
 			return model;
 		}
@@ -281,9 +283,11 @@ public class OrdineAcquistoController {
 		ModelAndView model = new ModelAndView();
 		OrdineAcquisto oordine = ordser.getOrdineAcquistoById(id);
 		sessionObj.setAttribute("oggettoOrdineTemporaneo", oordine);
+		sessionObj.setAttribute("oggettoFornitore", oordine.getOfornitore());;
 		model.addObject("oggettoOrdineTemporaneo", oordine);
 		model.addObject("elencoDettagli", oordine.getDettagli());
 		sessionObj.setAttribute("oggettoDettagliTemporanei", oordine.getDettagli());
+
 		model.addObject("elencoFornitori", forser.getAllFornitori());
 		sessionObj.setAttribute("contatore", this.count = 0);
 		model.setViewName("OrdineAcquisto/EditOrdine");
@@ -340,6 +344,7 @@ public class OrdineAcquistoController {
 			sessionObj.setAttribute("oggettoDettagliTemporanei", oordine.getDettagli());
 			model.addObject("oggettoOrdineTemporaneo", oordine);
 			model.addObject("elencoDettagli", oordine.getDettagli());
+			
 			model.addObject("elencoFornitori", forser.getAllFornitori());
 			model.setViewName("OrdineAcquisto/EditOrdine");
 			return model;

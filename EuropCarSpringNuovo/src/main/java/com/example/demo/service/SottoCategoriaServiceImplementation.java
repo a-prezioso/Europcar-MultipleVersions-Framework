@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.OrdineDiAcquistoDettaglio;
 import com.example.demo.model.SottoCategoria;
 import com.example.demo.repository.SottoCategoriaRepository;
 
@@ -41,6 +43,14 @@ public class SottoCategoriaServiceImplementation implements SottoCategoriaServic
 	@Override
 	public List<SottoCategoria> getSottoCategoriePerAnno(int idannocontabile) {
 		return sotrep.findSottoPerAnno(idannocontabile);
+	}
+
+	@Override
+	public void riconcilia(List<OrdineDiAcquistoDettaglio> dettagli) {
+		List<SottoCategoria> listaSot = new ArrayList<>();
+		for(OrdineDiAcquistoDettaglio dettaglio : dettagli) {
+			
+		}
 	}
 
 }

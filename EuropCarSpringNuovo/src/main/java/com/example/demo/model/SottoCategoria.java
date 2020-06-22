@@ -11,10 +11,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.stereotype.Component;
+
 
 
 @Entity
 @Table(name="SOTTOCATEGORIA")
+@Component
 public class SottoCategoria {
 	//
 	public static final String PROPERTY_ID ="idsottocategoria";

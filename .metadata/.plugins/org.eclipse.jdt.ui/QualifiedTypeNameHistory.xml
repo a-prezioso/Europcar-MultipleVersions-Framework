@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="model.session.AreaInvestimento"/>
-    <fullyQualifiedTypeName name="model.dao.SpesaInvestimentoService"/>
-    <fullyQualifiedTypeName name="model.session.SpesaInvestimento"/>
-    <fullyQualifiedTypeName name="model.session.AnnoContabile"/>
-    <fullyQualifiedTypeName name="model.dao.PrevisioneService"/>
-    <fullyQualifiedTypeName name="model.dao.AreaService"/>
-    <fullyQualifiedTypeName name="model.session.SottoCategoria"/>
-    <fullyQualifiedTypeName name="model.dao.SottoCategoriaService"/>
-    <fullyQualifiedTypeName name="model.dao.AreaInvestimentoService"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="model.session.Venditore"/>
-    <fullyQualifiedTypeName name="ws.Person"/>
-    <fullyQualifiedTypeName name="model.session.Fornitore"/>
     <fullyQualifiedTypeName name="javassist.expr.NewArray"/>
     <fullyQualifiedTypeName name="ws.FornitoreDTO"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
@@ -36,7 +22,6 @@
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Assertions"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.example.demo.model.OrdineAcquisto"/>
-    <fullyQualifiedTypeName name="com.example.demo.model.Fornitore"/>
     <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.DisplayName"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
@@ -48,16 +33,31 @@
     <fullyQualifiedTypeName name="org.junit.Rule"/>
     <fullyQualifiedTypeName name="org.mockito.junit.MockitoRule"/>
     <fullyQualifiedTypeName name="org.mockito.Mock"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.junit.Test"/>
     <fullyQualifiedTypeName name="org.mockito.Mockito"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.mockito.Spy"/>
     <fullyQualifiedTypeName name="com.example.demo.model.Previsione"/>
-    <fullyQualifiedTypeName name="com.example.demo.model.AnnoContabile"/>
     <fullyQualifiedTypeName name="org.mockito.Captor"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
+    <fullyQualifiedTypeName name="javax.validation.constraints.NotNull"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+    <fullyQualifiedTypeName name="com.example.demo.model.Fornitore"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
+    <fullyQualifiedTypeName name="com.example.demo.model.OrdineDiAcquistoDettaglio"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.example.demo.model.AnnoContabile"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+    <fullyQualifiedTypeName name="com.example.demo.model.FormRiconciliazione"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.DispatcherServlet"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Scope"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.example.demo.model.SottoCategoria"/>
+    <fullyQualifiedTypeName name="com.example.demo.util.UDate"/>
+    <fullyQualifiedTypeName name="javax.persistence.Temporal"/>
+    <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
+    <fullyQualifiedTypeName name="javax.persistence.TemporalType"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>

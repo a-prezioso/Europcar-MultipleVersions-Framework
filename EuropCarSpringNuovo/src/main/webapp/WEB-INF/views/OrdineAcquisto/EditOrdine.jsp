@@ -46,7 +46,12 @@
 			<div class="form-group">
 				<label>Fornitore</label>
 				<form:select path="ofornitore" cssClass="form-control" id="ragionesociale">
+		<!--  		<c:if test="${oggettoOrdineTemporaneo.ofornitore.idfornitore == 0 }">-->
 					<form:option value="0">Seleziona un fornitore</form:option>
+				<!--</c:if> -->
+				<!--<c:if test="${oggettoOrdineTemporaneo.ofornitore.idfornitore != 0 }">
+					<form:option value="${oggettoOrdineTemporaneo.ofornitore.idfornitore != 0 }">${oggettoOrdineTemporaneo.ofornitore.ragionesociale}</form:option>
+				</c:if>-->
 					<form:options items="${elencoFornitori}" itemValue="idfornitore" itemLabel="ragionesociale" />
 				</form:select>
 				<form:errors path="ofornitore" cssClass="error"/>

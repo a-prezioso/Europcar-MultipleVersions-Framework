@@ -99,7 +99,7 @@ public class OrdineTest {
 	public void exceptionControl() {
 		System.out.println("exceptionControl");
 		OrdineAcquisto ordine = new OrdineAcquisto();
-		ordine.setData("ciao");
+//		ordine.setData("ciao");
 		assertThrows(NullPointerException.class, () -> ordine.getOfornitore().setCap("prova"));
 	}
 	

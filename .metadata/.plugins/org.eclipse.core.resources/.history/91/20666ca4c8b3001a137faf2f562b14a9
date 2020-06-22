@@ -1,0 +1,46 @@
+package com.example.demo.model;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class FormRiconciliazione {
+	
+	@NotNull(message = "Il campo deve essere riempito")
+	Fornitore ofornitore;
+	
+	@NotBlank(message="il campo non può essere vuoto")
+	String datainizio;
+	
+	@NotBlank(message="il campo non può essere vuoto")
+	String datafine;
+
+	public Fornitore getOfornitore() {
+		return ofornitore;
+	}
+
+	public void setOfornitore(Fornitore ofornitore) {
+		this.ofornitore = ofornitore;
+	}
+
+	public String getDatainizio() {
+		return datainizio;
+	}
+
+	public void setDatainizio(String datainizio) {
+		this.datainizio = datainizio;
+	}
+
+	public String getDatafine() {
+		return datafine;
+	}
+
+	public void setDatafine(String datafine) {
+		this.datafine = datafine;
+	}
+	
+	
+
+}

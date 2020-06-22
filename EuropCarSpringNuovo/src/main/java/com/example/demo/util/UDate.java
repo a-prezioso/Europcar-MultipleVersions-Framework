@@ -52,6 +52,7 @@ public class UDate implements java.io.Serializable{
 	//    Attributo aggiunto da Gaetanino Paolone Marzo 2006
 	//*******************************************************************************************    
 	public static String formatoData = "dd/MM/yyyy";
+	public static String formatoData2 = "yyyy-MM-dd";
 
 
 
@@ -609,7 +610,7 @@ c     */
 	public static String inserisciStringa(Date ingresso)
 	{
 		String uscita;
-		SimpleDateFormat sdf=new SimpleDateFormat(formatoData);
+		SimpleDateFormat sdf=new SimpleDateFormat(formatoData2);
 		if(ingresso == null)
 		{
 			uscita=null;

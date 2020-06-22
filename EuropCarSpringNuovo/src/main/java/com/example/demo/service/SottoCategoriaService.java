@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.model.OrdineDiAcquistoDettaglio;
 import com.example.demo.model.SottoCategoria;
 
 public interface SottoCategoriaService {
@@ -15,5 +16,7 @@ public interface SottoCategoriaService {
 	public void deleteSottoCategoria(Integer idSottoCategoria);
 
 	public List<SottoCategoria> getSottoCategoriePerAnno(int idannocontabile);
+
+	public void riconcilia(List<OrdineDiAcquistoDettaglio> dettagli);
 
 }

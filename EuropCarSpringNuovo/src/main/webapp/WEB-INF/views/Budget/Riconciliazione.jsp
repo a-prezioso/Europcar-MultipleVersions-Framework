@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,24 +21,31 @@
 <a class="btn btn-light" href="http://localhost:8086/menu/List"
 	role="button">Home</a>
 <a class="btn btn-light"
-	href="http://localhost:8086/OrdineAcquisto/Cerca" role="button">Annulla</a>
+	href="http://localhost:8086/Budget/Lista" role="button">Indietro</a>
 <body>
 	<div class="container">
 		<spring:url value="/Budget/SaveRiconciliazione/" var="saveURL" />
-		<form:form modelAttribute="oggettoOrdineTemporaneo" method="post" action="${saveURL}" cssClass="form">
+		<h3>${messaggio}</h3>
+		<form:form modelAttribute="oggettoForm" method="post"
+			action="${saveURL}" cssClass="form">
 			<div class="form-group">
-				<label>Fornitore</label>
-				<form:select path="ofornitore" cssClass="form-control"
-					id="ragionesociale">
-					<form:option value="0">Seleziona un fornitore</form:option>
-					<form:options items="${elencoFornitori}" itemValue="idfornitore" itemLabel="ragionesociale" />
-				</form:select>
-				<form:errors path="ofornitore" cssClass="error" />
+				<label>Data Inizio</label>
+				<form:input type="date" path="datainizio" cssClass="form-control"
+					id="datainizio" />
+				<form:errors path="datainizio" cssClass="error" />
+			</div>
+			<div class="form-group">
+				<label>Data Fine</label>
+				<form:input type="date" path="datafine" cssClass="form-control"
+					id="datafine" />
+				<form:errors path="datafine" cssClass="error" />
 			</div>
 
-			<button type="submit" class="btn btn-primary">Salva</button>
+			<button type="submit" class="btn btn-primary">Riconcilia</button>
 		</form:form>
 	</div>
+	<br>
+	<h3>${messaggio}</h3>
 
 </body>
 </html>

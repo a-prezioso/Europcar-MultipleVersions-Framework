@@ -1,0 +1,40 @@
+package com.example.demo.model;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class FormRiconciliazione {
+	
+	Fornitore ofornitore;
+	
+	String datainizio;
+	
+	String datafine;
+
+	public Fornitore getOfornitore() {
+		return ofornitore;
+	}
+
+	public void setOfornitore(Fornitore ofornitore) {
+		this.ofornitore = ofornitore;
+	}
+
+	public String getDatainizio() {
+		return datainizio;
+	}
+
+	public void setDatainizio(String datainizio) {
+		this.datainizio = datainizio;
+	}
+
+	public String getDatafine() {
+		return datafine;
+	}
+
+	public void setDatafine(String datafine) {
+		this.datafine = datafine;
+	}
+	
+	
+
+}
