@@ -13,11 +13,14 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="ALIQUOTAIVA")
+//@Component
+//@Scope("prototype")
 public class AliquotaIva {
 
 	@Column(name = "idaliquotaiva")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private int idaliquotaiva;
 	
 	@Column(name="aliquota")

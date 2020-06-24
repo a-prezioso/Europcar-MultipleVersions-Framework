@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,15 +21,23 @@ import com.example.demo.service.AliquotaIvaService;
 @Controller
 @RequestMapping(value = "/AliquotaIva")
 public class AliquotaIvaController {
+	
+	@Autowired
+	private Environment environment;
 
 	@Autowired
 	AliquotaIvaService AliquotaIvaservice;
+	
+	@Autowired
+	@Qualifier("1")
+	AliquotaIva aliquota;
 
 	@GetMapping(value = "/ListaAliquoteIva")
 	public ModelAndView listaAliquoteIva() {
 		ModelAndView model = new ModelAndView("AliquotaIva/ListaAliquoteIva");
 		List<AliquotaIva> listaaliquoteIva = AliquotaIvaservice.getAllAliquoteIva();
 		model.addObject("elencoAliquoteIva", listaaliquoteIva);
+		environment.getProperty("prova");
 		return model;
 	}
 

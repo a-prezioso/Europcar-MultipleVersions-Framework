@@ -44,12 +44,39 @@ public class OrdineDiAcquistoDettaglio {
 	@NotNull(message = "il campo non può essere vuoto")
 	private int quantita;
 	
+	@Column(name = "riconciliaro")
+	private boolean riconciliato;
+	
 	@Transient
 	private int identifier;
 	
+	
+	
+	
+	
+//	public OrdineDiAcquistoDettaglio() {
+//		this.riconciliato = false;
+//	}
+
+//	public boolean isRiconciliato() {
+//		return riconciliato;
+//	}
+//
+//
+//
+//	public void setRiconciliato(boolean riconciliato) {
+//		this.riconciliato = riconciliato;
+//	}
+
+
 	public int getIdentifier() {
 		return identifier;
 	}
+	
+	
+
+
+
 
 	public void setIdentifier(int identifier) {
 		this.identifier = identifier;

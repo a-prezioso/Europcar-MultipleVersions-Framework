@@ -32,27 +32,14 @@
 				<form:input type = "date" path="data" cssClass="form-control" id="data" />
 				<form:errors path="data" cssClass="error" />
 			</div>
-			<div class="form-group">
-				<label>Importo</label>
-				<form:input path="importo" cssClass="form-control" id="importo" />
-				<form:errors path="importo" cssClass="error" />
-			</div>
+
 			<div class="form-group">
 				<label>Ordine d'acquisto</label>
 				<form:input path="ordineacquisto" cssClass="form-control" id="ordineacquisto" />
 				<form:errors path="ordineacquisto" cssClass="error" />
 			</div>
 			
-			<div class="form-group">
-				<label>Fornitore</label>
-				<form:select path="ofornitore" cssClass="form-control" id="ragionesociale">
-				<c:if test="${oggettoOrdineTemporaneo.ofornitore.idfornitore == 0 }">
-					<form:option value="0">Seleziona un fornitore</form:option>
-				</c:if>
-					<form:options items="${elencoFornitori}" itemValue="idfornitore" itemLabel="ragionesociale" />
-				</form:select>
-				<form:errors path="ofornitore" cssClass="error"/>
-			</div>
+		
 			<button type="submit" class="btn btn-primary">Salva</button>&nbsp;<spring:url value="/OrdineAcquisto/AddDettagliSuccessivi/" var="addURL" />
 				<a href="${addURL}" role="button" class="btn btn-primary">Nuovo Dettaglio</a>
 		</form:form>

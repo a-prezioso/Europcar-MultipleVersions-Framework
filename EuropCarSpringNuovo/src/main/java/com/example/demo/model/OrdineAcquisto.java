@@ -47,7 +47,6 @@ public class OrdineAcquisto {
 	private Date data;
 
 	@Column(name="importo")
-	@NotNull(message="il campo non può essere vuoto")
 	private float importo;
 
 	@Column(name="ordineacquisto")
@@ -56,7 +55,6 @@ public class OrdineAcquisto {
 	
 	@ManyToOne
 	@JoinColumn(name = "idfornitore")
-	@NotNull(message="il campo non può essere nullo")
 	private Fornitore ofornitore;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "oordineacquisto", orphanRemoval = true)

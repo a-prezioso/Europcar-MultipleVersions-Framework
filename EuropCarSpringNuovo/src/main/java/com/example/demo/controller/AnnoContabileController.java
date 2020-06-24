@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +31,9 @@ public class AnnoContabileController {
 	}
 
 	@GetMapping(value = "/GeneraAnno")
-	public ModelAndView addAreaInvestimento() {
+	public ModelAndView addAreaInvestimento(HttpSession sessionObj) {
 		AnnoContabile oannovecchio = annoservice.getUltimoAnno();
+		if(oannovecchio != null) {
 		Calendar datafine = Calendar.getInstance();
 		datafine.setTime(oannovecchio.getDatafine());
 		datafine.add(Calendar.YEAR, 1);
@@ -45,8 +48,10 @@ public class AnnoContabileController {
 		oanno.setDescrizione(b + "/" + d);
 		oanno.setDatainizio(datainizio.getTime());
 		oanno.setDatafine(datafine.getTime()); 
-		annoservice.saveOrUpdate(oanno);
+		annoservice.saveOrUpdate(oanno); }
+
 		return new ModelAndView("redirect:/AnnoContabile/ListaAnni");
+		
 	
 	}
 	

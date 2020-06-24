@@ -57,15 +57,26 @@ public class BudgetController {
 		ModelAndView model = new ModelAndView();
 		List<OrdineDiAcquistoDettaglio> dettagli = new ArrayList<OrdineDiAcquistoDettaglio>();
 		try {
-			dettagli = detser.getOrdiniPerSottoCategorieDate(UDate.inserisciStringa(form.getDatainizio()), UDate.inserisciStringa(form.getDatafine()));
+			dettagli = detser.getOrdiniPerSottoCategorieDate(UDate.inserisciStringa(form.getDatainizio()),
+					UDate.inserisciStringa(form.getDatafine()));
+//			for (OrdineDiAcquistoDettaglio dettaglio : dettagli) {
+//				if (dettaglio.isRiconciliato())
+//					dettagli.remove(dettaglio);
+//			}
+//			if (dettagli.size() != 0) {
+				sotser.riconcilia(dettagli);
+				model.addObject("messaggio", "Riconciliazione effettuata correttamente");
+				for (OrdineDiAcquistoDettaglio dettaglio : dettagli) {
+//					dettaglio.setRiconciliato(true);
+					detser.saveOrUpdate(dettaglio);
+				}
+//			}
 		} catch (ParseException e) {
-			e.printStackTrace();
+			model.addObject("messaggio", "Riconciliazione non effettuata correttamente");
 		}
-		sotser.riconcilia(dettagli);
+
 		model.setViewName("Budget/Riconciliazione");
 		return model;
 	}
-
-	
 
 }

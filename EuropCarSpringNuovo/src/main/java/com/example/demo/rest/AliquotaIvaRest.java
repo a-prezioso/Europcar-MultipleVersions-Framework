@@ -3,6 +3,9 @@ package com.example.demo.rest;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +48,16 @@ public class AliquotaIvaRest {
 		}
 		return oali;
 	}
+
+
+	//Alternativa all'utilizzo dei metodi tradizionali
+//	@GetMapping(value = "/{id}")
+//	public ResponseEntity<AliquotaIva> getByID2(@PathVariable("id") Integer id) {
+//		HttpHeaders header = new HttpHeaders();
+//		header.set("prova header", "valore header");
+//		AliquotaIva oaliq = aliser.getAliquotaIvaById(id);
+//		return new ResponseEntity<AliquotaIva>(oaliq, header, HttpStatus.CREATED);
+//	}
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable("id") Integer id) {

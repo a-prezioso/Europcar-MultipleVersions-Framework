@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.example.demo.model.OrdineDiAcquistoDettaglio;
 import com.example.demo.model.SottoCategoria;
 

@@ -1,0 +1,64 @@
+package com.example.demo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.OrdineDiAcquistoDettaglio;
+import com.example.demo.model.SottoCategoria;
+import com.example.demo.repository.SottoCategoriaRepository;
+
+@Service
+@Transactional
+public class SottoCategoriaServiceImplementation implements SottoCategoriaService {
+
+	@Autowired
+	SottoCategoriaRepository sotrep;
+
+	@Override
+	public List<SottoCategoria> getAllSottoCategorie() {
+		return (List<SottoCategoria>) sotrep.findAll();
+	}
+
+	@Override
+	public SottoCategoria getSottoCategoriaById(Integer idSottoCategoria) {
+		return sotrep.findById(idSottoCategoria).get();
+	}
+
+	@Override
+	public SottoCategoria saveOrUpdate(SottoCategoria oSottoCategoria) {
+		return sotrep.save(oSottoCategoria);
+
+	}
+
+	@Override
+	public void deleteSottoCategoria(Integer idSottoCategoria) {
+		sotrep.deleteById(idSottoCategoria);
+	}
+
+	@Override
+	public List<SottoCategoria> getSottoCategoriePerAnno(int idannocontabile) {
+		return sotrep.findSottoPerAnno(idannocontabile);
+	}
+
+	
+	////FINIRE DI CONTROLLARE QUESTO E POI FARE IL SET BUDGET SPESO
+	@Override
+	public HttpSession riconcilia(List<OrdineDiAcquistoDettaglio> dettagli, HttpSession sessionObj) {
+		List<SottoCategoria> listaSot = new ArrayList<>();
+		for (OrdineDiAcquistoDettaglio dettaglio : dettagli) {
+			if (sessionObj.getAttribute(String.valueOf(dettaglio.getOspesainvestimento().getOsottocategoria().getIdsottocategoria())) != null) {
+				sessionObj.setAttribute(String.valueOf(dettaglio.getOspesainvestimento().getOsottocategoria().getIdsottocategoria()),
+						sessionObj.getAttribute(String.valueOf(dettaglio.getOspesainvestimento().getOsottocategoria().getIdsottocategoria()) + dettaglio.getImporto()));
+			} else {
+				sessionObj.setAttribute(String.valueOf(dettaglio.getOspesainvestimento().getOsottocategoria().getIdsottocategoria()), dettaglio.getImporto());
+			}
+		}
+	}
+
+}

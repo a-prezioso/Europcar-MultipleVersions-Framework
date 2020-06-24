@@ -30,24 +30,13 @@
 				<form:input type ="date" path="data" cssClass="form-control" id="data" />
 				<form:errors path="data" cssClass="error" />
 			</div>
-			<div class="form-group">
-				<label>Importo</label>
-				<form:input path="importo" cssClass="form-control" id="importo" />
-				<form:errors path="importo" cssClass="error" />
-			</div>
+
 			<div class="form-group">
 				<label>Ordine Acquisto</label>
 				<form:input path="ordineacquisto" cssClass="form-control" id="ordineacquisto" />
 				<form:errors path="ordineacquisto" cssClass="error" />
 			</div>
-			<div class="form-group">
-				<label>Fornitore</label>
-				<form:select path="ofornitore" cssClass="form-control" id="ragionesociale">
-					<form:option value="0">Seleziona un fornitore</form:option>
-					<form:options items="${elencoFornitori}" itemValue="idfornitore" itemLabel="ragionesociale" />
-				</form:select>
-							<form:errors path="ofornitore" cssClass="error"/>
-			</div>
+		
 			<button type="submit" class="btn btn-primary">Aggiungi Dettagli</button>
 		</form:form>
 	</div>
