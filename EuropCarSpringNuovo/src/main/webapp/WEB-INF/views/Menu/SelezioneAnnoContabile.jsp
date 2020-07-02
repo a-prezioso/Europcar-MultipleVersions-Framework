@@ -19,7 +19,7 @@
 </head>
 
 <spring:url value="/Login/Login/" var="addURL" />
-<a href="${addURL}" role="button" class="btn btn-primary">Indietro</a>
+
 <body>
 	<div class="container">
 		<spring:url value="/SelezioneAnno/ProcessaAnno/" var="saveURL" />
