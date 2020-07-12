@@ -33,8 +33,8 @@
 		<item key="create_unimplemented" value="true"/>
 	</section>
 	<section name="completion_proposal_size">
-		<item key="size.x" value="428"/>
-		<item key="size.y" value="1046"/>
+		<item key="size.x" value="426"/>
+		<item key="size.y" value="558"/>
 	</section>
 	<section name="RefactoringWizard.preview">
 		<item key="width" value="600"/>

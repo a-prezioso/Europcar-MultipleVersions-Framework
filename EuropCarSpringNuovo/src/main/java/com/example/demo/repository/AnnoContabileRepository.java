@@ -7,8 +7,7 @@ import com.example.demo.model.AnnoContabile;
 
 public interface AnnoContabileRepository extends CrudRepository<AnnoContabile, Integer> {
 
-	@Query(value = "SELECT * FROM AnnoContabile WHERE idannocontabile = (SELECT MAX(idannocontabile) FROM AnnoContabile)",
-			nativeQuery = true)
+	@Query(value = "SELECT * FROM AnnoContabile WHERE idannocontabile = (SELECT MAX(idannocontabile) FROM AnnoContabile)", nativeQuery = true)
 	AnnoContabile getUltimoAnno();
 
 	

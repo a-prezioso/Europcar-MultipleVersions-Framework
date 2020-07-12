@@ -49,7 +49,6 @@ public class AnnoContabileController {
 		oanno.setDatainizio(datainizio.getTime());
 		oanno.setDatafine(datafine.getTime()); 
 		annoservice.saveOrUpdate(oanno); }
-
 		return new ModelAndView("redirect:/AnnoContabile/ListaAnni");
 		
 	

@@ -24,17 +24,18 @@
 		<h3>EuropCar</h3>
 		<br>
 		<div class="btn-group-vertical">
-			<a class="btn btn-primary" href="http://localhost:8086/Archivio/Lista" role="button">Archivio</a> 
-		  	<a class="btn btn-secondary" href="http://localhost:8086/Impostazioni/Lista" role="button">Impostazioni</a> 
-			<a class="btn btn-danger" href="http://localhost:8086/Venditore/ListaVenditori" role="button">Gestione Venditore</a>
+			<a class="btn btn-primary" href="/Archivio/Lista" role="button">Archivio</a> 
+		  	<a class="btn btn-secondary" href="/Impostazioni/Lista" role="button">Impostazioni</a> 
+			<a class="btn btn-danger" href="/Venditore/ListaVenditori" role="button">Gestione Venditore</a>
 		<c:if test="${oggettoUtentePermanente.isAdmin() == true}">		
-			<a class="btn btn-dark" href="http://localhost:8086/Utente/ListaUtenti" role="button">Gestione Utenti</a> 
+			<a class="btn btn-dark" href="/Utente/ListaUtenti" role="button">Gestione Utenti</a> 
 		</c:if> 	
-		<a class="btn btn-success" href="http://localhost:8086/Preventivo/Cerca" role="button">Gestione Preventivi</a> 
-		<a class="btn btn-info" href="http://localhost:8086/Budget/Lista" role="button">Budget</a> 
-		<a class="btn btn-warning" href="http://localhost:8086/FatturaPassiva/Menu" role="button">Gestione Fatture</a> 
-		<a class="btn btn-primary" href="http://localhost:8086/ImportaFatture/Importa" role="button">Importa Fatture</a> 
-		<a class="btn btn-secondary" href="http://localhost:8086/OrdineAcquisto/Menu" role="button">Gestione Ordini D'acquisto</a>
+		<a class="btn btn-success" href="/Preventivo/Cerca" role="button">Gestione Preventivi</a> 
+		<a class="btn btn-info" href="/Budget/Lista" role="button">Budget</a> 
+		<a class="btn btn-warning" href="/FatturaPassiva/Menu" role="button">Gestione Fatture</a> 
+		<a class="btn btn-primary" href="/ImportaFatture/Importa" role="button">Importa Fatture</a> 
+		<a class="btn btn-secondary" href="/OrdineAcquisto/Menu" role="button">Gestione Ordini D'acquisto</a>
+		<a class="btn btn-secondary" href="/Previsionale/Cerca" role="button">Previsionale</a>
 		</div>
 	</div>
 

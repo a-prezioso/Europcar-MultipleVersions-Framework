@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -42,6 +43,7 @@ public class Utente {
 	private boolean admin;
 	
 	@NotBlank(message = "il campo non può essere vuoto")
+	@Transient
 	private String passwordConfirm;
 	
 	

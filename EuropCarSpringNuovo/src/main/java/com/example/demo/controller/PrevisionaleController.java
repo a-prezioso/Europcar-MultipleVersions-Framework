@@ -62,13 +62,13 @@ public class PrevisionaleController {
 	}
 
 	@PostMapping(value = "/ListaPrevisionali")
-	public ModelAndView listaPreventivi(@ModelAttribute Venditore ovenditore, HttpSession sessionObj) {
+	public ModelAndView listaPreventivi(@ModelAttribute("oggettoVenditoreSelezione") Venditore ovenditore, HttpSession sessionObj) {
 		ModelAndView model = new ModelAndView();
 		model.addObject("oggettoVenditoreSelezione", ovenditore);
 		sessionObj.setAttribute("oggettoVenditorePrevisionale", ovenditore);
 		model.addObject("elencoVenditori", venser.getAllVenditori());
 		model.addObject("elencoPrevisionali", preser.getPrevisionaleByVend(ovenditore.getIdvenditore()));
-		model.setViewName("Previsionale/ListaPrevisionali");
+		model.setViewName("Previsione/ListaPrevisionali");
 		return model;
 	}
 	
@@ -82,7 +82,7 @@ public class PrevisionaleController {
 		model.addObject("elencoAree", areser.getAllAree());
 		model.addObject("elencoAziende", aziser.getAllAziende());
 		model.addObject("elencoVenditori", venser.getAllVenditori());
-		model.setViewName("Previsionale/AddEditPrevisionale");
+		model.setViewName("Previsione/AddEditPrevisionale");
 		return model;
 	}
 
@@ -93,7 +93,7 @@ public class PrevisionaleController {
 		model.addObject("elencoAree", areser.getAllAree());
 		model.addObject("elencoAziende", aziser.getAllAziende());
 		model.addObject("elencoVenditori", venser.getAllVenditori());
-		model.setViewName("Previsionale/AddEditPrevisionaleo");
+		model.setViewName("Previsione/AddEditPrevisionaleo");
 		return model;
 	}
 
@@ -102,7 +102,7 @@ public class PrevisionaleController {
 			BindingResult bindingresult, HttpSession sessionObj, Model modelFornitore) {
 		if (bindingresult.hasErrors()) {
 			ModelAndView model = new ModelAndView();
-			model.setViewName("Previsionale/AddEditPrevisionale");
+			model.setViewName("Previsione/AddEditPrevisionale");
 			return model;
 		} else {
 			preser.saveOrUpdate(oprevisionale);

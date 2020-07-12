@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,10 @@ public class UtenteController {
 
 	@Autowired
 	VenditoreService venditoreservice;
+	
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@GetMapping(value = "/ListaUtenti")
 	public ModelAndView listaUtenti() {
@@ -70,8 +75,7 @@ public class UtenteController {
 			return model;
 		} else {
 			if (oUtente.getPassword().equalsIgnoreCase(oUtente.getPasswordConfirm())) {
-				oUtente.setPassword(PasswordUtil.cryptWithMD5(oUtente.getPassword())); 
-				oUtente.setPasswordConfirm(oUtente.getPassword());
+				oUtente.setPassword(passwordEncoder.encode(oUtente.getPassword()));
 				utenteservice.saveOrUpdate(oUtente);
 				return new ModelAndView("redirect:/Utente/ListaUtenti");
 			} else {
