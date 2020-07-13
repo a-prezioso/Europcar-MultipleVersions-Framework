@@ -11,6 +11,7 @@ public class EuropCarSpringNuovoApplication {
 //	        System.setProperty("server.tomcat.max-threads","200");
 //	        System.setProperty("server.connection-timeout","60000");
 		SpringApplication.run(EuropCarSpringNuovoApplication.class, args);
+		
 	}
 
 }

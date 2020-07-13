@@ -1,0 +1,155 @@
+package com.example.demo.service;
+
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.criteria.AbstractQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Selection;
+import javax.persistence.criteria.Subquery;
+import javax.persistence.metamodel.EntityType;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.AliquotaIva;
+import com.example.demo.repository.AliquotaIvaRepository;
+
+@Service
+@Transactional
+public class AliquotaIvaServiceImplementation implements AliquotaIvaService, AbstractQuery<AliquotaIva> {
+	
+	@Autowired
+	AliquotaIvaRepository alirep;
+
+	@Override
+	public List<AliquotaIva> getAllAliquoteIva() {
+		return (List<AliquotaIva>) alirep.findAll();
+	}
+
+	@Override
+	public AliquotaIva getAliquotaIvaById(Integer idAliquotaIva) {
+		return alirep.findById(idAliquotaIva).get();
+	}
+
+	@Override
+	public AliquotaIva saveOrUpdate(AliquotaIva oAliquotaIva) {
+		return alirep.save(oAliquotaIva);
+	}
+
+	@Override
+	public void deleteAliquotaIva(Integer idAliquotaIva) {
+		alirep.deleteById(idAliquotaIva);
+	}
+
+	@Override
+	public AliquotaIva findAliquotaPerAliquota(float aliquotaIVA) {
+		return (AliquotaIva) alirep.findAliquotaByAliquota(aliquotaIVA);
+	}
+
+	@Override
+	public <U> Subquery<U> subquery(Class<U> type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Predicate getRestriction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <X> Root<X> from(Class<X> entityClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <X> Root<X> from(EntityType<X> entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AbstractQuery<AliquotaIva> where(Expression<Boolean> restriction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AbstractQuery<AliquotaIva> where(Predicate... restrictions) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AbstractQuery<AliquotaIva> groupBy(Expression<?>... grouping) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AbstractQuery<AliquotaIva> groupBy(List<Expression<?>> grouping) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AbstractQuery<AliquotaIva> having(Expression<Boolean> restriction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AbstractQuery<AliquotaIva> having(Predicate... restrictions) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AbstractQuery<AliquotaIva> distinct(boolean distinct) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Root<?>> getRoots() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Selection<AliquotaIva> getSelection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Expression<?>> getGroupList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Predicate getGroupRestriction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isDistinct() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Class<AliquotaIva> getResultType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

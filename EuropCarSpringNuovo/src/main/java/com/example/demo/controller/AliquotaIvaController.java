@@ -28,8 +28,6 @@ public class AliquotaIvaController {
 	@Autowired
 	AliquotaIvaService AliquotaIvaservice;
 	
-
-
 	@GetMapping(value = "/ListaAliquoteIva")
 	public ModelAndView listaAliquoteIva() {
 		ModelAndView model = new ModelAndView("AliquotaIva/ListaAliquoteIva");

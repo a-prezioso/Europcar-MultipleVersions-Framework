@@ -19,7 +19,8 @@ public class AliquotaIvaServiceImplementation implements AliquotaIvaService {
 
 	@Override
 	public List<AliquotaIva> getAllAliquoteIva() {
-		return (List<AliquotaIva>) alirep.findAll();
+		System.out.println("ciao");
+		return null;
 	}
 
 	@Override

@@ -1,0 +1,45 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.AliquotaIva;
+
+@Service
+@Transactional
+public class AliquotaIvaServiceImplementation implements AliquotaIvaService {
+
+	@Override
+	public List<AliquotaIva> getAllAliquoteIva() {
+		System.out.println("ciao");
+		return null;
+	}
+
+	@Override
+	public AliquotaIva getAliquotaIvaById(Integer idAliquotaIva) {
+		
+		return null;
+	}
+
+	@Override
+	public AliquotaIva saveOrUpdate(AliquotaIva oAliquotaIva) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteAliquotaIva(Integer idAliquotaIva) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public AliquotaIva findAliquotaPerAliquota(float aliquotaIva) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
